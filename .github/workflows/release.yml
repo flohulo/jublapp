@@ -1,0 +1,65 @@
+name: Release
+
+# release-please pflegt den Release-PR (Changelog + Version in package.json).
+# Wird dieser gemergt, entsteht ein Entwurf-Release; danach werden APK, EXE und
+# Web-ZIP gebaut, angehängt und der Release veröffentlicht. Die Webseite selbst
+# deployt Netlify bei jedem Push auf main.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
+jobs:
+  release-please:
+    name: Release-PR erstellen oder aktualisieren
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - name: Release-PR erstellen oder aktualisieren
+        id: release
+        uses: googleapis/release-please-action@v5
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          config-file: .release-please-config.json
+          manifest-file: .release-please-manifest.json
+          skip-github-pull-request: "${{ github.event_name == 'push' && startsWith(github.event.head_commit.message, 'chore: release ') }}"
+
+  build:
+    name: Apps bauen
+    needs: release-please
+    if: needs.release-please.outputs.release_created == 'true'
+    uses: ./.github/workflows/app-build.yml
+
+  publish:
+    name: Release veröffentlichen
+    needs: [release-please, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Dateien anhängen und Release veröffentlichen
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          TAG: ${{ needs.release-please.outputs.tag_name }}
+        run: |
+          gh release upload "$TAG" \
+            artifacts/android-apk/JUBLAPP.apk \
+            artifacts/windows-exe/JUBLAPP-windows.zip \
+            artifacts/web/JUBLAPP-web.zip \
+            --clobber --repo "$GITHUB_REPOSITORY"
+          gh release edit "$TAG" --draft=false --repo "$GITHUB_REPOSITORY"
