@@ -1,0 +1,33 @@
+name: PR-Titel prüfen
+
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize, ready_for_review]
+
+permissions:
+  pull-requests: read
+
+jobs:
+  pr-title:
+    name: Conventional-Commit-Titel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate pull request title for Release Please
+        uses: amannn/action-semantic-pull-request@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            perf
+            refactor
+            docs
+            test
+            build
+            ci
+            chore
+            i18n
+            revert
+          subjectPattern: ^(?![A-Z]).+$
+          subjectPatternError: Die Beschreibung nach dem Doppelpunkt soll klein beginnen.

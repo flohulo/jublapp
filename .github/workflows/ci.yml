@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  # Analyse + Tests. Die Tests prüfen auch die Mehrsprachigkeit: alle Sprachen
+  # haben dieselben Schlüssel/Platzhalter und app/assets/locales spiegelt locales/.
+  test:
+    name: Analyse und Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Version und Übersetzungen in die App übernehmen
+        run: node update-version.js
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.41.1"
+          channel: stable
+          cache: true
+
+      - name: Abhängigkeiten laden
+        working-directory: app
+        run: flutter pub get
+
+      - name: Analyse
+        working-directory: app
+        run: flutter analyze
+
+      - name: Tests
+        working-directory: app
+        run: flutter test
+
+  handbuch:
+    name: Handbuch bauen
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - run: pip install -r requirements.txt
+
+      - run: mkdocs build --strict
