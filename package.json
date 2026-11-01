@@ -1,0 +1,20 @@
+{
+  "name": "jubla-reporting",
+  "version": "0.8.6",
+  "description": "Jubla Wald ZH – Reporting Tool",
+  "scripts": {
+    "dev": "npm run build:web && netlify dev",
+    "build": "node update-version.js",
+    "build:web": "bash scripts/build-web.sh",
+    "test": "cd app && flutter analyze && flutter test"
+  },
+  "dependencies": {
+    "@netlify/functions": "6.0.3",
+    "jspdf": "4.2.1",
+    "jspdf-autotable": "5.0.9",
+    "nodemailer": "10.3.1"
+  },
+  "devDependencies": {
+    "netlify-cli": "27.16.0"
+  }
+}

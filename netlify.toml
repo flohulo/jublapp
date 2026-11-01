@@ -1,0 +1,78 @@
+[build]
+  command = "bash scripts/netlify-build.sh"
+  publish = "dist"
+  edge_functions = "backend/edge-functions"
+  node_bundler = "esbuild"
+
+[functions]
+  directory = "backend/functions"
+
+[dev]
+  framework = "#static"
+  publish = "dist"
+
+[[redirects]]
+  from = "/api/strike"
+  to = "/.netlify/functions/strikes"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+  force = true
+
+# Flutter-Web-App (Single Page App): unbekannte Pfade -> index.html.
+# Echte Dateien (z. B. /handbuch/, /forms.html) haben Vorrang.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Auth-Prüfung nur dort, wo Daten fliessen.
+[[edge_functions]]
+  function = "auth"
+  path = "/api/*"
+
+[[edge_functions]]
+  function = "auth"
+  path = "/.netlify/functions/*"
+
+[[edge_functions]]
+  function = "auth"
+  path = "/forms.html"
+
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    cache-control = "max-age=0, no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/flutter_service_worker.js"
+  [headers.values]
+    cache-control = "max-age=0, no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    cache-control = "max-age=0, no-cache, must-revalidate"
+
+[[headers]]
+  for = "/flutter_bootstrap.js"
+  [headers.values]
+    cache-control = "max-age=0, no-cache, must-revalidate"
+
+[[headers]]
+  for = "/version.json"
+  [headers.values]
+    cache-control = "max-age=0, no-cache, must-revalidate"
+
+[[headers]]
+  for = "/manifest.json"
+  [headers.values]
+    cache-control = "max-age=0, no-cache, no-store, must-revalidate"
+
+[build.environment]
+  PYTHON_VERSION = "3.14"
+  FLUTTER_VERSION = "3.41.1"

@@ -1,0 +1,39 @@
+# Dependencies
+/node_modules
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+/build
+
+# Coverage reports
+/coverage
+
+# Local environment files
+.env*
+!.env.example
+
+# Local Netlify folder
+.netlify
+
+# Misc
+.DS_Store
+*.pem
+
+.vscode
+deno.lock
+# Build-Ausgabe der Flutter-Web-App + Handbuch
+/dist
+
+# Archiv der alten PWA (nur lokal, der Verlauf liegt in Git)
+/legacy-pwa
+
+# Flutter / Android-Signierung
+/app/build
+/app/.dart_tool
+/app/android/key.properties
+*.jks
+*.keystore

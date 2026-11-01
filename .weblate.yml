@@ -1,0 +1,14 @@
+# Weblate-Komponentenkonfiguration für Codeberg Translate (https://translate.codeberg.org)
+# Siehe Dokumentation: https://docs.weblate.org/en/latest/admin/config.html
+
+version: 1
+
+discovery:
+  - component: app
+    name: JUBL(A)PP
+    file_format: json-nested
+    filemask: locales/*.json
+    template: locales/de.json
+    source_language: de
+    new_base: locales/de.json
+

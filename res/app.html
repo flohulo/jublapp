@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title id="pageTitle">Reporting Tool</title>
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="theme-color" content="#d65a5a" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css" />
+    <script src="/assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <header class="top-nav">
+      <div class="nav-left">
+        <span class="nav-title" id="appOrgName">Jubla Reporting</span>
+        <span id="headerSubtitle" style="display: none"></span>
+      </div>
+      <div class="nav-right">
+        <a id="shoppingListLink" href="shopping.html">Einkaufsliste</a>
+        <a href="app.html">Reporting</a>
+        <a href="strikes.html">Strikes</a>
+        <button
+          id="logoutBtnTop"
+          class="btn-logout"
+          onclick="logout()"
+          style="display: none"
+        >
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="card">
+      <!-- LOGIN -->
+      <div class="card-body" id="loginArea">
+        <p class="section-title login-title">
+          <span id="loginTitle">Anmelden</span>
+        </p>
+        <form
+          onsubmit="
+            login();
+            return false;
+          "
+        >
+          <div class="form-group">
+            <label class="form-label" id="nameLabel">Dein Name</label>
+            <input
+              type="text"
+              id="userNameInput"
+              class="form-control"
+              placeholder="Vorname"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="pinLabel">Schar-PIN</label>
+            <div class="pin-group">
+              <input
+                type="password"
+                id="pinInput"
+                class="form-control"
+                placeholder="••••"
+                inputmode="numeric"
+                maxlength="8"
+                autocomplete="one-time-code"
+                onkeydown="if (event.key === 'Enter') login();"
+              />
+              <span class="toggle-pin" onclick="UI.togglePin()"
+                ><i class="fa-regular fa-eye"></i
+              ></span>
+            </div>
+          </div>
+          <p class="error-msg" id="loginError"></p>
+          <button type="submit" class="btn btn-primary" id="loginBtn">
+            Anmelden
+          </button>
+        </form>
+      </div>
+
+      <!-- TAB BAR -->
+      <div class="tab-bar" id="tabBar" style="display: none">
+        <button
+          id="tabReport"
+          class="tab-btn active"
+          onclick="UI.showTab('formTab', this)"
+        >
+          Bericht
+        </button>
+        <button
+          id="tabRequest"
+          class="tab-btn"
+          onclick="UI.showTab('requestTab', this)"
+        >
+          Auszug
+        </button>
+        <button
+          id="tabInfo"
+          class="tab-btn"
+          onclick="UI.showTab('infoTab', this)"
+        >
+          Info
+        </button>
+      </div>
+
+      <!-- FORM -->
+      <div class="card-body" id="formTab" style="display: none">
+        <button
+          class="btn btn-secondary"
+          id="helpTipsBtn"
+          onclick="UI.toggleSupportBox()"
+        >
+          <i class="fa-solid fa-lightbulb"></i> Hilfe & Tipps
+        </button>
+        <div class="support-box" id="supportBox">
+          <ul id="helpPointsList">
+            <!-- Wird aus config.js geladen -->
+          </ul>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" id="dateLabel">Datum</label
+          ><input type="date" id="f_datum" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">
+            <input
+              type="checkbox"
+              id="f_fuer_check"
+              onchange="UI.toggleReportFor()"
+            />
+            <span id="reportForOthersLabel">Report für andere</span>
+          </label>
+        </div>
+        <div class="form-group" id="rolleGroup">
+          <label class="form-label" id="roleLabel">Meine Rolle</label>
+          <select id="f_rolle" class="form-control">
+            <!-- Wird aus config.js geladen -->
+          </select>
+        </div>
+        <div class="form-group" id="partnerGroup">
+          <label class="form-label" id="partnerLabel">Partner/in</label
+          ><input
+            type="text"
+            id="f_partner"
+            class="form-control"
+            placeholder="Name"
+          />
+        </div>
+        <div class="form-group" id="hlGroup" style="display: none">
+          <label class="form-label" id="hlLabel">Hauptleitung</label
+          ><input
+            type="text"
+            id="f_hl"
+            class="form-control"
+            placeholder="Name"
+          />
+        </div>
+        <div class="form-group" id="hilfsGroup" style="display: none">
+          <label class="form-label" id="hilfsLabel">Hilfsleitung</label
+          ><input
+            type="text"
+            id="f_hilfs"
+            class="form-control"
+            placeholder="Name"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="kidsCountLabel">Anzahl Kinder</label
+          ><input
+            type="number"
+            id="f_anzahl"
+            class="form-control"
+            placeholder="z.B. 12"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="leadersCountLabel"
+            >Zusätzliche Leiter</label
+          ><input
+            type="number"
+            id="f_leiter"
+            class="form-control"
+            placeholder="z.B. 2"
+            min="0"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="dynamicsLabel">Gruppendynamik</label>
+          <select
+            id="f_dynamik"
+            class="form-control"
+            onchange="UI.onDynamikChange()"
+          >
+            <!-- Wird aus config.js geladen -->
+          </select>
+          <div class="dynamik-warn" id="warnBox">
+            <i class="fa-solid fa-triangle-exclamation"></i> Bitte beschreibe
+            die Situation ausführlich.
+          </div>
+          <div class="dynamik-crit" id="critBox">
+            <i class="fa-solid fa-circle-xmark"></i> Bitte melde dich zusätzlich
+            bei der Scharleitung!
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="remarksLabel">Bemerkungen</label
+          ><textarea
+            id="f_bemerkungen"
+            class="form-control"
+            rows="5"
+          ></textarea>
+        </div>
+        <p class="error-msg" id="formError"></p>
+        <button class="btn btn-primary" onclick="submitReport()">
+          <span id="submitBtn">Report absenden</span>
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+
+      <!-- REQUEST -->
+      <div class="card-body" id="requestTab" style="display: none">
+        <p class="section-title">
+          <i class="fa-solid fa-envelope-open-text"></i>
+          <span id="requestTitle">Auszug anfordern</span>
+        </p>
+        <p
+          style="
+            font-size: 0.85em;
+            color: var(--mid);
+            margin-bottom: 20px;
+            line-height: 1.5;
+          "
+          id="requestInfoText"
+        >
+          <!-- Wird aus config.js geladen -->
+        </p>
+        <div class="form-group">
+          <label class="form-label" id="emailLabel">Deine E-Mail</label>
+          <input
+            type="email"
+            id="r_email"
+            class="form-control"
+            placeholder="max@muster.ch"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="requestDateVonLabel">Startdatum</label>
+          <input type="date" id="r_datum_von" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="requestDateBisLabel">Enddatum</label>
+          <input type="date" id="r_datum_bis" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label" id="requestReasonLabel"
+            >Grund der Anforderung</label
+          >
+          <textarea
+            id="r_grund"
+            class="form-control"
+            rows="2"
+            placeholder="Warum brauchst du den Auszug?"
+          ></textarea>
+        </div>
+
+        <div id="requestStep1">
+          <button class="btn btn-secondary" onclick="requestCode()">
+            <span id="requestCodeBtn">Verifizierungs-Code anfordern</span>
+            <i class="fa-solid fa-key"></i>
+          </button>
+        </div>
+
+        <div
+          id="requestStep2"
+          style="
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--blu-lt);
+            border-radius: var(--radius);
+          "
+        >
+          <p
+            style="font-size: 0.85em; margin-bottom: 10px"
+            id="verificationCodeLabel"
+          >
+            Bitte gib den 6-stelligen Code aus deiner E-Mail ein:
+          </p>
+          <div class="form-group">
+            <input
+              type="text"
+              id="r_pin"
+              class="form-control"
+              placeholder="123456"
+              inputmode="numeric"
+              maxlength="6"
+            />
+          </div>
+          <button class="btn btn-primary" onclick="submitRequest()">
+            <span id="requestBtn">Berichte anzeigen</span>
+            <i class="fa-solid fa-envelope"></i>
+          </button>
+        </div>
+
+        <p class="error-msg" id="requestError"></p>
+      </div>
+
+      <!-- INFO -->
+      <div class="card-body" id="infoTab" style="display: none">
+        <p class="section-title">
+          <i class="fa-solid fa-circle-info"></i>
+          <span id="infoSectionTitle">Allgemeine Infos</span>
+        </p>
+        <div class="support-box open">
+          <strong id="contactTitle">Kontakt</strong><br />
+          Telefon: <span id="contactPhone">lade...</span><br />
+          E-Mail: <span id="contactEmail">lade...</span><br /><br />
+          <strong id="generalInfoTitle">Allgemeines</strong><br />
+          <span id="generalInfoText"> <!-- Wird aus config.js geladen --> </span
+          ><br /><br />
+          <strong id="linksTitle">Wichtige Links</strong>
+          <ul id="linksList">
+            <li>
+              <a id="landingPageLink" href="index.html">Projekt Webseite</a>
+            </li>
+            <li>
+              <a
+                id="jublaschweizweb"
+                href="https://www.jubla.ch"
+                target="_blank"
+                rel="noreferrer"
+                >Jubla Schweiz Webseite</a
+              >
+            </li>
+            <li>
+              <a
+                id="jublakanton"
+                href="https://www.jublazueri.ch"
+                target="_blank"
+                rel="noreferrer"
+                >Jubla Kanton Zürich</a
+              >
+            </li>
+            <li>
+              <a
+                id="jublaschar"
+                href="https://www.jubla-wald.ch"
+                target="_blank"
+                rel="noreferrer"
+                >Jubla Wald ZH</a
+              >
+            </li>
+            <li>
+              <a
+                id="githubProjectLink"
+                href="https://github.com/flohulo/jubla-reporting"
+                target="_blank"
+                rel="noreferrer"
+                >Projekt auf GitHub</a
+              >
+            </li>
+            <li>
+              <a
+                id="licenseLink"
+                href="/license.html"
+                target="_blank"
+                rel="noreferrer"
+                >Lizenz</a
+              >
+            </li>
+            <li>
+              <a
+                id="legalLink"
+                href="/legal.html"
+                target="_blank"
+                rel="noreferrer"
+                >Rechtliche Hinweise</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="UI.toggleAccordion(this)">
+              <i class="fa-solid fa-phone"></i>
+              <span id="accEmergency">Notrufnummern</span>
+            </button>
+            <div class="accordion-content" id="emergencyContent">
+              <!-- Wird aus config.js geladen -->
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="UI.toggleAccordion(this)">
+              <i class="fa-solid fa-circle-question"></i>
+              <span id="accHelp">Hilfe-Themen</span>
+            </button>
+            <div class="accordion-content" id="helpTopicsContent">
+              <!-- Wird aus config.js geladen -->
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="UI.toggleAccordion(this)">
+              <i class="fa-solid fa-clipboard-list"></i>
+              <span id="accLegal">Rechtliche Hinweise</span>
+            </button>
+            <div class="accordion-content" id="legalContent">
+              <!-- Wird aus config.js geladen -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <span
+          ><a
+            id="versionLink"
+            class="footer-link"
+            href="/releases.html"
+            target="_blank"
+            rel="noreferrer"
+            ><span id="versionText">Version</span>
+            <span id="versionLabel">lade...</span></a
+          ></span
+        >
+        <span class="footer-links">
+          <a id="issueLink" href="/report.html" target="_blank" rel="noreferrer"
+            >Fehler melden</a
+          >
+          <a
+            id="footerLegalLink"
+            href="/legal.html"
+            target="_blank"
+            rel="noreferrer"
+            >Rechtliches</a
+          >
+        </span>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/api-client.js"></script>
+    <script src="/assets/js/ui-controller.js"></script>
+    <script src="/assets/js/validation.js"></script>
+    <script src="/assets/js/reporting.js"></script>
+    <script>
+      // Initiales Branding anwenden
+      if (window.APP_CONFIG) {
+        UI.applyBranding();
+        UI.populateHelpPoints();
+      }
+    </script>
+  </body>
+</html>

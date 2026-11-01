@@ -1,0 +1,24 @@
+name: Abhängigkeiten prüfen
+
+on:
+  schedule:
+    # Jeden Montag um 07:00 Uhr
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+jobs:
+  security-audit:
+    name: Node.js Security Audit
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+
+      - name: Check for vulnerabilities
+        run: npm audit --audit-level=moderate --package-lock-only

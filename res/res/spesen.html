@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JUBL(A)PP - Kasse</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/action.css" />
+  </head>
+  <body>
+    <div class="mobile-container">
+      <div class="header">
+        <a href="/finanzen.html">
+          <i class="fa-solid fa-xmark header-icon"></i>
+        </a>
+        <div class="header-title">
+          JUBL(A)PP<br />
+          Spesen
+        </div>
+        <div><i class="fa-solid fa-check header-icon"></i></div>
+      </div>
+
+      <div class="form-container">
+        <div class="form-group">
+          <label class="form-label">Datum/Zeit</label>
+          <input type="text" class="input-field" id="datetime-field" />
+        </div>
+        <script>
+          const now = new Date();
+          const options = {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+          };
+          const formatter = new Intl.DateTimeFormat("de-CH", options);
+          document.getElementById("datetime-field").value = formatter
+            .format(now)
+            .replace(
+              /(\d{2})\.(\d{2})\.(\d{4}), (\d{2}):(\d{2})/,
+              "$1.$2.$3 $4:$5",
+            );
+        </script>
+      </div>
+    </div>
+
+    <script src="/assets/app.js"></script>
+  </body>
+</html>

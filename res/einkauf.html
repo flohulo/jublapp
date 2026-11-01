@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title id="pageTitle">Schareinkaufliste</title>
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="theme-color" content="#2d6a4f" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css" />
+    <script src="/assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <header class="top-nav">
+      <div class="nav-left">
+        <span class="nav-title" id="appOrgName">Jubla Reporting</span>
+        <span id="headerSubtitle" style="display: none"></span>
+      </div>
+      <div class="nav-right">
+        <a id="shoppingListLink" href="shopping.html">Einkaufsliste</a>
+        <a href="app.html">Reporting</a>
+        <a href="strikes.html">Strikes</a>
+        <button
+          id="logoutBtnTop"
+          class="btn-logout"
+          onclick="logout()"
+          style="display: none"
+        >
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="card">
+      <!-- LOGIN -->
+      <div class="card-body" id="loginArea">
+        <p class="section-title login-title" id="loginTitle">Anmelden</p>
+        <form
+          onsubmit="
+            login();
+            return false;
+          "
+        >
+          <div class="form-group">
+            <label class="form-label" id="nameLabel">Dein Name</label>
+            <input
+              type="text"
+              id="userNameInput"
+              class="form-control"
+              placeholder="Vorname"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label" id="pinLabel">Schar-PIN</label>
+            <div class="pin-group">
+              <input
+                type="password"
+                id="pinInput"
+                class="form-control"
+                placeholder="••••"
+                inputmode="numeric"
+                maxlength="8"
+                autocomplete="one-time-code"
+                onkeydown="if (event.key === 'Enter') login();"
+              />
+              <span class="toggle-pin" onclick="UI.togglePin()"
+                ><i class="fa-regular fa-eye"></i
+              ></span>
+            </div>
+          </div>
+          <p class="error-msg" id="loginError"></p>
+          <button type="submit" class="btn btn-primary" id="loginBtn">
+            Anmelden
+          </button>
+        </form>
+      </div>
+
+      <div class="card-body" id="mainArea" style="display: none; padding: 0">
+        <div class="todo-header">
+          <h2 id="shoppingTitle">Einkaufsliste</h2>
+          <div class="todo-toolbar">
+            <button
+              class="icon-btn"
+              id="toggleDoneBtn"
+              onclick="toggleDoneVisibility()"
+              title="Erledigte ausblenden"
+              style="
+                background: none;
+                border: none;
+                color: var(--mid);
+                cursor: pointer;
+                font-size: 1.2em;
+                padding: 8px;
+              "
+            >
+              <i class="fa-solid fa-eye-slash"></i>
+            </button>
+            <button
+              class="icon-btn"
+              id="clearDoneBtn"
+              onclick="clearDoneItems()"
+              title="Erledigte löschen"
+              style="
+                background: none;
+                border: none;
+                color: var(--mid);
+                cursor: pointer;
+                font-size: 1.2em;
+                padding: 8px;
+              "
+            >
+              <i class="fa-solid fa-broom"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="todo-list" id="shoppingList">
+          <!-- JS dynamic -->
+        </div>
+
+        <div class="todo-add-container">
+          <div class="todo-add-row">
+            <i class="fa-solid fa-plus add-icon"></i>
+            <input
+              type="text"
+              id="s_item"
+              class="form-control todo-input"
+              placeholder="Aufgabe hinzufügen..."
+            />
+            <button
+              class="btn btn-primary btn-sm"
+              id="addItemBtn"
+              onclick="addItem()"
+            >
+              <span id="addBtnText">Hinzufügen</span>
+            </button>
+          </div>
+          <div class="todo-add-details">
+            <input
+              type="text"
+              id="s_amount"
+              class="form-control input-sm"
+              placeholder="Menge"
+            />
+            <input
+              type="text"
+              id="s_category"
+              class="form-control input-sm"
+              placeholder="Kategorie"
+            />
+            <input
+              type="text"
+              id="s_note"
+              class="form-control input-sm"
+              placeholder="Notiz"
+            />
+          </div>
+          <p
+            class="error-msg"
+            id="shoppingError"
+            style="margin-top: 8px; margin-bottom: 0"
+          ></p>
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <span
+          ><a
+            id="versionLink"
+            class="footer-link"
+            href="/releases.html"
+            target="_blank"
+            rel="noreferrer"
+            ><span id="versionText">Version</span>
+            <span id="versionLabel">lade...</span></a
+          ></span
+        >
+        <span class="footer-links">
+          <a id="issueLink" href="/report.html" target="_blank" rel="noreferrer"
+            >Fehler melden</a
+          >
+          <a
+            id="footerLegalLink"
+            href="/legal.html"
+            target="_blank"
+            rel="noreferrer"
+            >Rechtliches</a
+          >
+        </span>
+      </div>
+    </div>
+
+    <script src="/assets/js/api-client.js"></script>
+    <script src="/assets/js/ui-controller.js"></script>
+    <script src="/assets/js/shopping.js"></script>
+  </body>
+</html>

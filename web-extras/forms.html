@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Netlify Forms</title>
+  </head>
+  <body>
+    <!--
+      Reine Deklaration für Netlify Forms (wird beim Deploy erkannt).
+      Die Flutter-App sendet Ereignis und Feedback per POST an /forms.html;
+      alle Felder müssen hier mit exakt denselben Namen deklariert sein
+      (siehe app/lib/screens/ereignis_screen.dart und feedback_screen.dart).
+    -->
+    <form
+      name="ereignis"
+      method="POST"
+      enctype="multipart/form-data"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="hidden" name="form-name" value="ereignis" />
+      <input name="bot-field" />
+      <input name="timestamp" />
+      <input name="datum" />
+      <input name="melder_name" />
+      <input name="melder_funktion" />
+      <input name="kategorie" />
+      <input name="art" />
+      <input name="schweregrad" />
+      <input name="ort" />
+      <input name="betroffene" />
+      <textarea name="beschreibung"></textarea>
+      <textarea name="massnahmen"></textarea>
+      <textarea name="weiteres_vorgehen"></textarea>
+      <input type="file" name="foto_1" />
+      <input type="file" name="foto_2" />
+      <input type="file" name="foto_3" />
+      <input type="file" name="foto_4" />
+      <input type="file" name="foto_5" />
+      <input type="file" name="foto_6" />
+      <input type="file" name="foto_7" />
+      <input type="file" name="foto_8" />
+      <input type="file" name="foto_9" />
+      <input type="file" name="foto_10" />
+    </form>
+
+    <form name="feedback-form" method="POST" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="feedback-form" />
+      <select name="type"></select>
+      <input type="email" name="email" />
+      <input name="timestamp" />
+      <textarea name="message"></textarea>
+    </form>
+  </body>
+</html>

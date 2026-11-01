@@ -1,0 +1,14 @@
+site_name: JUBL(A)PP Handbuch
+site_dir: dist/handbuch
+docs_dir: docs
+
+nav:
+  - Startseite: index.md
+  - Erste Schritte: erste-schritte.md
+  - Aufbau und Bedienung: seitenaufbau.md
+  - Funktionen:
+      - Übersicht: funktionen.md
+      - Strike-Verwaltung: strike.md
+      - Ereignis melden: ereignis.md
+      - Links: links.md
+  - About: about.md
