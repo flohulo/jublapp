@@ -4,7 +4,7 @@ Danke für dein Interesse! Das Jubla Reporting Tool ist eine Flutter-App (Web, A
 
 ## Lokal entwickeln
 
-Voraussetzungen: Node.js (aktuell), npm und das [Flutter SDK](https://docs.flutter.dev/get-started/install) (3.41.1). Ausserdem wird die [Netlify CLI](https://docs.netlify.com/cli/get-started/) benötigt.
+Voraussetzungen: Node.js (aktuell), npm und das [Flutter SDK](https://docs.flutter.dev/get-started/install) (3.47.9). Ausserdem wird die [Netlify CLI](https://docs.netlify.com/cli/get-started/) benötigt.
 
 ```bash
 npm install

@@ -459,7 +459,7 @@ class _PhotoButton extends StatelessWidget {
     required this.onPressed,
   });
 
-  final IconData icon;
+  final FaIconData icon;
   final String label;
   final VoidCallback? onPressed;
 

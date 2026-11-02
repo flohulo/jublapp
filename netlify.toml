@@ -75,4 +75,4 @@
 
 [build.environment]
   PYTHON_VERSION = "3.14"
-  FLUTTER_VERSION = "3.41.1"
+  FLUTTER_VERSION = "3.47.9"

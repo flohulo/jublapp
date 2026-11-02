@@ -23,7 +23,7 @@ class PageScaffold extends StatelessWidget {
 
   final String title;
   final Widget body;
-  final IconData leadingIcon;
+  final FaIconData leadingIcon;
   final String? leadingTooltip;
   final VoidCallback? onLeading;
   final Widget? action;
@@ -104,7 +104,7 @@ class _Header extends StatelessWidget {
   });
 
   final String title;
-  final IconData leadingIcon;
+  final FaIconData leadingIcon;
   final String? leadingTooltip;
   final VoidCallback? onLeading;
   final Widget? action;
@@ -168,7 +168,7 @@ class HeaderAction extends StatelessWidget {
     this.spinning = false,
   });
 
-  final IconData icon;
+  final FaIconData icon;
   final VoidCallback? onPressed;
   final String? tooltip;
   final double size;
