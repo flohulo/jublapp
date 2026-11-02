@@ -34,6 +34,10 @@ class AppConfig {
       ? '/handbuch/'
       : '${baseUrl.isEmpty ? productionUrl : baseUrl}/handbuch/';
 
+  /// Padlet des Lagers (Einbettungs-Adresse).
+  static const String padletUrl =
+      'https://padlet.com/embed/s024ubhxblf5j103t2p9';
+
   /// Wetter-Standort (Wald/ZH).
   static const double weatherLat = 47.2753;
   static const double weatherLon = 8.9168;

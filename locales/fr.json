@@ -30,6 +30,7 @@
   "uebersicht.title": "Aperçu",
   "uebersicht.card_gruppenstunde": "Heure de groupe",
   "uebersicht.card_links": "Liens",
+  "uebersicht.card_lager": "Camp",
 
   "gruppenstunde.title": "Heure de groupe",
   "gruppenstunde.card_strike": "Strike",
@@ -104,6 +105,9 @@
   "erfolg.success_text": "Transmis avec succès",
   "erfolg.back_to_overview": "Retour à l'aperçu",
 
+  "lager.title": "Camp",
+  "lager.native_hint": "Le Padlet du camp s'ouvre dans le navigateur.",
+  "lager.open_btn": "Ouvrir Padlet",
   "links.title": "Liens",
   "links.section_emergency": "Urgence & Crise",
   "links.jubla_zh_crisis": "Téléphone de crise Jubla Zurich",

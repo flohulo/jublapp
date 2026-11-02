@@ -18,6 +18,7 @@ class PageScaffold extends StatelessWidget {
     this.action,
     this.showLangSwitcher = true,
     this.padBody = false,
+    this.fillBody = false,
     this.backgroundColor = AppColors.bgInner,
   });
 
@@ -29,6 +30,10 @@ class PageScaffold extends StatelessWidget {
   final Widget? action;
   final bool showLangSwitcher;
   final bool padBody;
+
+  /// Body füllt den restlichen Platz (ohne Scrollen), z. B. für eingebettete
+  /// Seiten.
+  final bool fillBody;
   final Color backgroundColor;
 
   @override
@@ -71,17 +76,22 @@ class PageScaffold extends StatelessWidget {
                   Expanded(
                     child: SafeArea(
                       top: false,
-                      child: SingleChildScrollView(
-                        keyboardDismissBehavior:
-                            ScrollViewKeyboardDismissBehavior.onDrag,
-                        padding: padBody
-                            ? const EdgeInsets.symmetric(
-                                horizontal: 15,
-                                vertical: 20,
-                              )
-                            : EdgeInsets.zero,
-                        child: SizedBox(width: double.infinity, child: body),
-                      ),
+                      child: fillBody
+                          ? SizedBox.expand(child: body)
+                          : SingleChildScrollView(
+                              keyboardDismissBehavior:
+                                  ScrollViewKeyboardDismissBehavior.onDrag,
+                              padding: padBody
+                                  ? const EdgeInsets.symmetric(
+                                      horizontal: 15,
+                                      vertical: 20,
+                                    )
+                                  : EdgeInsets.zero,
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: body,
+                              ),
+                            ),
                     ),
                   ),
                 ],

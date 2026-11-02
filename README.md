@@ -23,6 +23,7 @@ Die JUBL(A)PP unterstützt Leitende der Jubla Wald ZH im Scharalltag. Sie läuft
 | **Ereignis melden**   | Unfälle, Konflikte und Sachschäden dokumentieren     |
 | **Wetter**            | Wetter für die Gruppenstunde im Blick                |
 | **Links**             | Notfallnummern, Jubla-Webseiten und Kontakte         |
+| **Lager**             | Padlet der Schar fürs Lager, im Web eingebettet      |
 | **Feedback**          | Fehler melden und Ideen einreichen, direkt in der App |
 
 Die Anleitungen für Leitende stehen im Handbuch (Quelltext in [`docs/`](docs/index.md)). Es wird beim Deploy unter `dist/handbuch` veröffentlicht.

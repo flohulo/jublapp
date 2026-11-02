@@ -30,6 +30,7 @@
   "uebersicht.title": "Overview",
   "uebersicht.card_gruppenstunde": "Group meeting",
   "uebersicht.card_links": "Links",
+  "uebersicht.card_lager": "Camp",
 
   "gruppenstunde.title": "Group meeting",
   "gruppenstunde.card_strike": "Strike",
@@ -104,6 +105,9 @@
   "erfolg.success_text": "Successfully submitted",
   "erfolg.back_to_overview": "Back to overview",
 
+  "lager.title": "Camp",
+  "lager.native_hint": "The camp Padlet opens in your browser.",
+  "lager.open_btn": "Open Padlet",
   "links.title": "Links",
   "links.section_emergency": "Emergency & Crisis",
   "links.jubla_zh_crisis": "Jubla Zurich Crisis Hotline",

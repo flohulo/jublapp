@@ -11,7 +11,7 @@ _Die Abbildung ist eine schematische Orientierung und kein Screenshot der App. J
 Der typische Weg zu einer Funktion ist:
 
 1. Melde dich mit dem PIN an, den du von der Scharleitung erhalten hast.
-2. Wähle auf der **Übersicht** den Bereich **Gruppenstunde** oder **Links**.
+2. Wähle auf der **Übersicht** den Bereich **Gruppenstunde**, **Links** oder **Lager**.
 3. Wähle in **Gruppenstunde** die gewünschte Funktion, zum Beispiel **Strike** oder **Ereignis melden**.
 4. Nutze das **X** in der Kopfzeile, um zur vorherigen Bereichsseite zurückzukehren.
 

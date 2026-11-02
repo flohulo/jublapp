@@ -36,6 +36,11 @@ class OverviewScreen extends StatelessWidget {
             label: context.t('uebersicht.card_links'),
             onTap: () => context.push(Routes.links),
           ),
+          MenuCard(
+            icon: FontAwesomeIcons.campground,
+            label: context.t('uebersicht.card_lager'),
+            onTap: () => context.push(Routes.lager),
+          ),
         ],
       ),
     );

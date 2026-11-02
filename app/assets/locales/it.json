@@ -30,6 +30,7 @@
   "uebersicht.title": "Panoramica",
   "uebersicht.card_gruppenstunde": "Incontro di gruppo",
   "uebersicht.card_links": "Link",
+  "uebersicht.card_lager": "Campo",
 
   "gruppenstunde.title": "Incontro di gruppo",
   "gruppenstunde.card_strike": "Strike",
@@ -104,6 +105,9 @@
   "erfolg.success_text": "Inviato con successo",
   "erfolg.back_to_overview": "Torna alla panoramica",
 
+  "lager.title": "Campo",
+  "lager.native_hint": "Il Padlet del campo si apre nel browser.",
+  "lager.open_btn": "Apri Padlet",
   "links.title": "Link",
   "links.section_emergency": "Emergenza & Crisi",
   "links.jubla_zh_crisis": "Telefono di emergenza Jubla Zurigo",
