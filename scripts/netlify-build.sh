@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-FLUTTER_VERSION="${FLUTTER_VERSION:-3.41.1}"
+FLUTTER_VERSION="${FLUTTER_VERSION:-3.47.9}"
 
 if ! command -v flutter >/dev/null 2>&1; then
   FLUTTER_HOME="${FLUTTER_HOME:-$HOME/flutter-sdk}"
