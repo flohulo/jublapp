@@ -7,14 +7,10 @@ Sprachen: Deutsch, Französisch, Italienisch, Englisch.
 
 # Funktionen
 
-- Strike
-- Rapport
-- Einkaufliste
-- Artikel auf Einkaufliste hinzufügen
-- Spesen
-- Barkasse
-- Leiterplaung
-- Leiter erfassen
+- Strike (bis zu vier Kinder erfassen)
+- Ereignis melden (Unfälle, Konflikte, Sachschäden)
+- Wetter
+- Feedback
 - Links
 
 # Handbuch
@@ -27,4 +23,4 @@ Der Backend-Quellcode liegt im Verzeichnis `backend/` und wird zusammen mit dem 
 
 # Bevor Github Push:
 
-- [ ] Version in package.json angepast?
+- [ ] Version in package.json angepasst?

@@ -1,6 +1,6 @@
 # Mitwirken am Jubla Reporting Tool
 
-Danke für dein Interesse! Das Jubla Reporting Tool ist eine Web-App für Jubla zur Verwaltung von Strikes, Rapporten, Einkaufslisten, Spesen, Barkasse und Leiterplanung. Beiträge sollten Funktionalität, Datenschutz und einfache Bedienbarkeit gemeinsam berücksichtigen.
+Danke für dein Interesse! Das Jubla Reporting Tool ist eine Flutter-App (Web, Android, Windows) für Jubla zur Erfassung von Strikes und Ereignissen sowie für Wetter, Feedback und Links. Beiträge sollten Funktionalität, Datenschutz und einfache Bedienbarkeit gemeinsam berücksichtigen.
 
 ## Lokal entwickeln
 
@@ -13,7 +13,7 @@ npm run dev
 
 `npm run dev` baut die Flutter-Web-App nach `dist/` und startet den lokalen Netlify-Dev-Server inkl. Backend-Functions und Edge Functions. Tests: `npm test` (Flutter analyze + test).
 
-Der Build (erzeugt Versionsdatei und baut das MkDocs-Handbuch) läuft mit:
+Die Version und die Übersetzungen werden in die App übertragen mit:
 
 ```bash
 npm run build
@@ -32,7 +32,6 @@ Eine `.env.local`-Datei wird für die lokale Entwicklung benötigt. Orientiere d
 | `app/`                    | Flutter-App (Web, Android, Windows)               |
 | `web-extras/forms.html`   | Netlify-Forms-Deklaration (Ereignis, Feedback)    |
 | `scripts/`                | Build-Skripte (Netlify, Web)                      |
-| `legacy-pwa/`             | Alte PWA (nur Archiv, kann gelöscht werden)       |
 | `docs/`                   | Handbuch-Quelltext (MkDocs)                       |
 | `netlify.toml`            | Netlify-Konfiguration (Build, Redirects, Headers) |
 | `mkdocs.yml`              | Handbuch-Navigation und -Konfiguration            |
@@ -70,7 +69,7 @@ Die Version wird in `package.json` gepflegt. Vor einem Push auf `main` die Versi
 - Erkläre den Anwendungsfall und die Auswirkungen auf die Nutzerinnen und Nutzer.
 - Halte Änderungen fokussiert.
 - Teile keine Zugangsdaten, E-Mail-Adressen, personenbezogenen Daten oder Inhalte aus `.env.local` im Code oder in Issues.
-- Vor einem Pull Request muss der Build (`npm run build`) erfolgreich sein.
+- Vor einem Pull Request müssen `flutter analyze` und `flutter test` (kurz: `npm test`) fehlerfrei laufen.
 
 ## Sicherheit
 
