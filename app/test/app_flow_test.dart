@@ -397,7 +397,8 @@ void main() {
         env.weatherFails = false;
         await tester.tap(
           find.byWidgetPredicate(
-            (w) => w is FaIcon && w.icon == FontAwesomeIcons.rotateRight,
+            (w) =>
+                w is FaIcon && w.icon == FontAwesomeIcons.rotateRight.data,
           ),
         );
         await tester.pumpAndSettle();
