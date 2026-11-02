@@ -14,7 +14,7 @@ class MenuCard extends StatelessWidget {
     this.emergency = false,
   });
 
-  final IconData icon;
+  final FaIconData icon;
   final String label;
   final String? sublabel;
   final VoidCallback onTap;
@@ -186,7 +186,7 @@ class ListBlockItem extends StatelessWidget {
     required this.onTap,
   });
 
-  final IconData icon;
+  final FaIconData icon;
   final String title;
   final String subtitle;
   final VoidCallback onTap;

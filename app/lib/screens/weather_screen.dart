@@ -15,7 +15,7 @@ import '../widgets/page_scaffold.dart';
 
 class _WmoInfo {
   const _WmoInfo(this.icon, this.color);
-  final IconData icon;
+  final FaIconData icon;
   final Color color;
 }
 
@@ -251,7 +251,7 @@ class _Hero extends StatelessWidget {
 class _Detail extends StatelessWidget {
   const _Detail({required this.icon, required this.label, required this.value});
 
-  final IconData icon;
+  final FaIconData icon;
   final String label;
   final String value;
 
