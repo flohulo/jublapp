@@ -30,6 +30,7 @@
   "uebersicht.title": "Übersicht",
   "uebersicht.card_gruppenstunde": "Gruppenstunde",
   "uebersicht.card_links": "Links",
+  "uebersicht.card_lager": "Lager",
 
   "gruppenstunde.title": "Gruppenstunde",
   "gruppenstunde.card_strike": "Strike",
@@ -104,6 +105,9 @@
   "erfolg.success_text": "Erfolgreich übermittelt",
   "erfolg.back_to_overview": "Zurück zur Übersicht",
 
+  "lager.title": "Lager",
+  "lager.native_hint": "Das Lager-Padlet öffnet sich im Browser.",
+  "lager.open_btn": "Padlet öffnen",
   "links.title": "Links",
   "links.section_emergency": "Notfall & Krise",
   "links.jubla_zh_crisis": "Jubla Zürich Krisentelefon",

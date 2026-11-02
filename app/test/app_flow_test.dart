@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:jublapp/config.dart';
 import 'package:jublapp/i18n/i18n.dart';
 import 'package:jublapp/router.dart';
 import 'package:jublapp/services/api_client.dart';
@@ -58,6 +59,7 @@ void main() {
       expect(Routes.normalize('/erfolg.html'), Routes.success);
       expect(Routes.normalize('/index.html'), Routes.login);
       expect(Routes.normalize('/links/'), Routes.links);
+      expect(Routes.normalize('/pages/lager.html'), Routes.lager);
       expect(Routes.normalize('/gibt-es-nicht'), Routes.login);
     });
 
@@ -482,6 +484,24 @@ void main() {
       await tester.tap(find.text('Feedback & Bugreports'));
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('feedback-message')), findsOneWidget);
+    });
+  });
+
+  group('Lager', () {
+    testWidgets('Übersicht-Karte öffnet die Lager-Seite, Button öffnet Padlet', (
+      tester,
+    ) async {
+      final env = TestEnv();
+      await env.pumpApp(tester);
+      await tester.tap(find.text('Lager'));
+      await tester.pumpAndSettle();
+      expect(find.byKey(const Key('lager-open')), findsOneWidget);
+      await tester.tap(find.byKey(const Key('lager-open')));
+      await tester.pumpAndSettle();
+      expect(env.opener.opened.single.toString(), AppConfig.padletUrl);
+      await tester.tap(find.byTooltip('Schliessen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Gruppenstunde'), findsOneWidget);
     });
   });
 

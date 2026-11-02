@@ -21,3 +21,4 @@ Folgende Drittanbieter werden verwendet:
 - Netlify (Hosting, Funktions)
 - Google (Speicherung)
 - GlitchTip (Bugreporting)
+- Padlet (Lager-Pinnwand)

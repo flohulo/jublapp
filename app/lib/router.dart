@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'screens/ereignis_screen.dart';
 import 'screens/feedback_screen.dart';
 import 'screens/gruppenstunde_screen.dart';
+import 'screens/lager_screen.dart';
 import 'screens/links_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/overview_screen.dart';
@@ -24,6 +25,7 @@ class Routes {
   static const weather = '/wetter';
   static const success = '/erfolg';
   static const links = '/links';
+  static const lager = '/lager';
   static const feedback = '/feedback';
 
   static const all = [
@@ -35,6 +37,7 @@ class Routes {
     weather,
     success,
     links,
+    lager,
     feedback,
   ];
 
@@ -79,6 +82,7 @@ GoRouter createRouter(AuthService auth, {String? initialLocation}) {
       GoRoute(path: Routes.weather, builder: (_, _) => const WeatherScreen()),
       GoRoute(path: Routes.success, builder: (_, _) => const SuccessScreen()),
       GoRoute(path: Routes.links, builder: (_, _) => const LinksScreen()),
+      GoRoute(path: Routes.lager, builder: (_, _) => const LagerScreen()),
       GoRoute(path: Routes.feedback, builder: (_, _) => const FeedbackScreen()),
     ],
   );
