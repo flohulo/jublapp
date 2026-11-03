@@ -8,7 +8,6 @@ on:
   pull_request:
     paths:
       - "app/**"
-      - "locales/**"
       - "scripts/**"
       - "update-version.js"
       - "package.json"

@@ -3,7 +3,7 @@
 ## Sprache und Texte
 - UI-Texte, Fehlermeldungen, Commit-Messages und PR-Texte sind auf Deutsch.
 - In der UI wird geduzt. Keine Emojis.
-- Jeder sichtbare Text kommt aus `locales/*.json` (de, fr, it, en), nie hartkodiert im Dart-Code. Neue Schlüssel in allen vier Sprachen ergänzen und mit `node update-version.js` nach `app/assets/locales/` spiegeln.
+- Jeder sichtbare Text kommt aus `app/assets/locales/*.json` (de, fr, it, en), nie hartkodiert im Dart-Code. Das ist der einzige Ort für Übersetzungen; neue Schlüssel in allen vier Sprachen ergänzen.
 
 ## Commits und Pull Requests
 - Commits und PR-Titel folgen Conventional Commits (`feat:`, `fix:`, `chore:` …). Daraus erzeugt release-please den Changelog.

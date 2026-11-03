@@ -6,11 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// Mehrsprachigkeit auf Basis der Weblate-verwalteten `locales/*.json`
+/// Mehrsprachigkeit auf Basis der `assets/locales/*.json`
 /// (flache Schlüssel wie `strike.title`, Platzhalter als `{name}`).
-///
-/// Die Dateien liegen als Assets unter `assets/locales/` und werden von
-/// `update-version.js` aus dem Repo-Verzeichnis `locales/` gespiegelt.
 class I18n extends ChangeNotifier {
   I18n._(this._translations, this._lang, this._prefs);
 
