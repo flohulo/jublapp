@@ -34,6 +34,9 @@ class AppConfig {
       ? '/handbuch/'
       : '${baseUrl.isEmpty ? productionUrl : baseUrl}/handbuch/';
 
+  /// Datenschutzerklärung (Seite im Handbuch).
+  static String get privacyUrl => '${handbookUrl}datenschutz/';
+
   /// Padlet des Lagers (Einbettungs-Adresse).
   static const String padletUrl =
       'https://padlet.com/embed/s024ubhxblf5j103t2p9';
