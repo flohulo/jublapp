@@ -23,6 +23,8 @@ npm run build
 
 Eine `.env.local`-Datei wird für die lokale Entwicklung benötigt. Orientiere dich an `.env.example`.
 
+Für den Login brauchst du `PIN` und `SESSION_SECRET` (zufällig, mindestens 32 Zeichen, z. B. mit `openssl rand -hex 32`). Fehlt eines von beiden, ist kein Login möglich. Das `SESSION_SECRET` muss auch in den Netlify-Umgebungsvariablen gesetzt sein. Wer es ändert, meldet damit alle Geräte ab.
+
 ## Projektstruktur
 
 | Verzeichnis / Datei       | Inhalt                                            |

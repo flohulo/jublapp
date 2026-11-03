@@ -1,4 +1,5 @@
 const rateLimit = require("./lib/rate-limit");
+const session = require("./lib/session");
 
 exports.handler = async (event) => {
   const CORS = {
@@ -35,10 +36,12 @@ exports.handler = async (event) => {
 
   const expectedPin = process.env.PIN;
 
-  // Ohne konfigurierten PIN ist kein Login möglich (sonst wäre das Token mit
-  // leerem Schlüssel von jedem berechenbar).
-  if (!expectedPin) {
-    console.error("Login nicht möglich: Umgebungsvariable PIN ist nicht gesetzt.");
+  // Ohne konfigurierten PIN oder SESSION_SECRET ist kein Login möglich (sonst
+  // ließen sich Sitzungs-Token von jedem berechnen).
+  if (!expectedPin || !session.isConfigured()) {
+    console.error(
+      "Login nicht möglich: PIN oder SESSION_SECRET (mind. 32 Zeichen) ist nicht gesetzt.",
+    );
     return {
       statusCode: 503,
       headers: CORS,
@@ -71,8 +74,7 @@ exports.handler = async (event) => {
   }
 
   if (pin === expectedPin) {
-    const { getExpectedToken } = require("./lib/auth");
-    const token = getExpectedToken();
+    const token = session.createSessionToken();
     try {
       await limiter.reset(key);
     } catch (e) {
@@ -82,7 +84,7 @@ exports.handler = async (event) => {
       statusCode: 200,
       headers: {
         ...CORS,
-        "Set-Cookie": `auth=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${60 * 60 * 24 * 30}`, // 30 days
+        "Set-Cookie": `auth=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${session.SESSION_SECONDS}`,
       },
       body: JSON.stringify({ ok: true }),
     };
