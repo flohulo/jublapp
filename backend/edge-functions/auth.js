@@ -31,6 +31,10 @@ export default async (request, context) => {
   }
 
   const correctPin = Netlify.env.get("PIN") || "";
+  // Ohne konfigurierten PIN gibt es kein gültiges Token.
+  if (!correctPin) {
+    return unauthorizedResponse();
+  }
   const encoder = new TextEncoder();
   const key = await crypto.subtle.importKey(
     "raw",

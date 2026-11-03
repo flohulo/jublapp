@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'api_client.dart';
 import 'error_reporter.dart';
 
-enum LoginResult { success, invalidPin, failed }
+enum LoginResult { success, invalidPin, rateLimited, failed }
 
 /// Anmeldezustand (PIN-Login gegen `/api/login`, 30 Tage gültiges Cookie).
 class AuthService extends ChangeNotifier {
@@ -39,6 +39,7 @@ class AuthService extends ChangeNotifier {
         return LoginResult.success;
       }
       if (status == 401) return LoginResult.invalidPin;
+      if (status == 429) return LoginResult.rateLimited;
       throw ApiException('Login failed', statusCode: status);
     } catch (e) {
       _reporter.reportSubmissionFailure('login', e, status);

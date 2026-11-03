@@ -25,6 +25,7 @@
   "login.pin_placeholder": "• • • •",
   "login.submit": "Se connecter",
   "login.error_invalid": "PIN incorrect.",
+  "login.error_rate_limited": "Trop de tentatives échouées. Réessaie dans 15 minutes.",
   "login.error_failed": "Connexion impossible. Vérifiez votre connexion et réessayez.",
 
   "uebersicht.title": "Aperçu",

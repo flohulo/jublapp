@@ -25,6 +25,7 @@
   "login.pin_placeholder": "• • • •",
   "login.submit": "Accedi",
   "login.error_invalid": "PIN errato.",
+  "login.error_rate_limited": "Troppi tentativi falliti. Riprova tra 15 minuti.",
   "login.error_failed": "Accesso non riuscito. Controlla la connessione e riprova.",
 
   "uebersicht.title": "Panoramica",

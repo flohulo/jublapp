@@ -6,9 +6,11 @@
     "dev": "npm run build:web && netlify dev",
     "build": "node update-version.js",
     "build:web": "bash scripts/build-web.sh",
-    "test": "cd app && flutter analyze && flutter test"
+    "test:backend": "node --test \"backend/functions/lib/*.test.js\"",
+    "test": "npm run test:backend && cd app && flutter analyze && flutter test"
   },
   "dependencies": {
+    "@netlify/blobs": "11.1.7",
     "@netlify/functions": "6.0.3",
     "jspdf": "4.2.1",
     "jspdf-autotable": "5.0.9",

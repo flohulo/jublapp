@@ -27,6 +27,9 @@ jobs:
         with:
           node-version: 22
 
+      - name: Backend-Tests
+        run: node --test "backend/functions/lib/*.test.js"
+
       - name: Version und Übersetzungen in die App übernehmen
         run: node update-version.js
 

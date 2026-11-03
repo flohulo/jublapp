@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-`npm run dev` baut die Flutter-Web-App nach `dist/` und startet den lokalen Netlify-Dev-Server inkl. Backend-Functions und Edge Functions. Tests: `npm test` (Flutter analyze + test).
+`npm run dev` baut die Flutter-Web-App nach `dist/` und startet den lokalen Netlify-Dev-Server inkl. Backend-Functions und Edge Functions. Tests: `npm test` (Backend-Tests mit `node --test`, dann Flutter analyze + test).
 
 Die Version und die Übersetzungen werden in die App übertragen mit:
 
