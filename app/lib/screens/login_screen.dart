@@ -68,14 +68,12 @@ class _LoginScreenState extends State<LoginScreen>
   Widget build(BuildContext context) {
     final i18n = context.watch<I18n>();
     return Scaffold(
-      backgroundColor: AppColors.bgOuter,
+      backgroundColor: Colors.white,
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: AppTheme.maxContentWidth),
           child: Material(
             color: Colors.white,
-            elevation: 4,
-            shadowColor: Colors.black26,
             child: SafeArea(
               child: LayoutBuilder(
                 builder: (context, constraints) => SingleChildScrollView(
