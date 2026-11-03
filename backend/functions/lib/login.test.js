@@ -24,9 +24,14 @@ function login(pin) {
   });
 }
 
-function withEnv(pin, fn) {
+const SECRET = "s".repeat(40);
+
+function withEnv(pin, fn, secret = SECRET) {
   return async () => {
     const before = process.env.PIN;
+    const beforeSecret = process.env.SESSION_SECRET;
+    if (secret === null) delete process.env.SESSION_SECRET;
+    else process.env.SESSION_SECRET = secret;
     const original = rateLimit.getLoginLimiter;
     const store = fakeStore();
     rateLimit.getLoginLimiter = () => rateLimit.createLimiter(store);
@@ -38,6 +43,8 @@ function withEnv(pin, fn) {
       rateLimit.getLoginLimiter = original;
       if (before === undefined) delete process.env.PIN;
       else process.env.PIN = before;
+      if (beforeSecret === undefined) delete process.env.SESSION_SECRET;
+      else process.env.SESSION_SECRET = beforeSecret;
     }
   };
 }
@@ -83,8 +90,19 @@ test("Zähler nicht erreichbar: Login wird verweigert", withEnv("123456", async 
   assert.equal((await login("123456")).statusCode, 503);
 }));
 
-test("verifyAuth lehnt Token mit leerem PIN ab", withEnv(undefined, async () => {
-  const { createHmac } = require("crypto");
-  const forged = createHmac("sha256", "").update("jubla-auth-token").digest("hex");
-  assert.equal(verifyAuth({ headers: { cookie: `auth=${forged}` } }), false);
+test("ohne SESSION_SECRET ist kein Login möglich", withEnv("123456", async () => {
+  const res = await login("123456");
+  assert.equal(res.statusCode, 503);
+  assert.equal(res.headers["Set-Cookie"], undefined);
+}, null));
+
+test("zu kurzes SESSION_SECRET wird abgelehnt", withEnv("123456", async () => {
+  assert.equal((await login("123456")).statusCode, 503);
+}, "kurz"));
+
+test("jede Anmeldung bekommt ein anderes Token, ohne PIN darin", withEnv("123456", async () => {
+  const a = (await login("123456")).headers["Set-Cookie"].split(";")[0];
+  const b = (await login("123456")).headers["Set-Cookie"].split(";")[0];
+  assert.notEqual(a, b);
+  assert.equal(a.includes("123456"), false);
 }));
