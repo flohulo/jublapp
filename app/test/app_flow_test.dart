@@ -274,9 +274,9 @@ void main() {
       await env.pumpApp(tester, lang: 'en', initialLocation: '/ereignis');
       await enter(tester, 'ereignis-melder', 'Anna Muster');
       await chooseDropdown(tester, 'ereignis-funktion', 'Main Leader');
-      await chooseDropdown(tester, 'ereignis-kategorie', '🛠️ Property damage');
+      await chooseDropdown(tester, 'ereignis-kategorie', 'Property damage');
       await enter(tester, 'ereignis-art', 'Sturz');
-      await chooseDropdown(tester, 'ereignis-schweregrad', '🟡 Medium');
+      await chooseDropdown(tester, 'ereignis-schweregrad', 'Medium');
       await enter(tester, 'ereignis-ort', 'Wald');
       await enter(tester, 'ereignis-beschreibung', 'Ausgerutscht');
       await tapKey(tester, 'photo-gallery');
