@@ -496,6 +496,9 @@ void main() {
       await tester.tap(find.text('Handbuch'));
       await tester.pumpAndSettle();
       expect(env.opener.opened.last.path, '/handbuch/');
+      await tester.tap(find.text('Datenschutz'));
+      await tester.pumpAndSettle();
+      expect(env.opener.opened.last.path, '/handbuch/datenschutz/');
       await tester.tap(find.text('Feedback & Bugreports'));
       await tester.pumpAndSettle();
       expect(find.byKey(const Key('feedback-message')), findsOneWidget);

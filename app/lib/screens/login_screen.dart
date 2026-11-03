@@ -291,22 +291,19 @@ class _Footer extends StatelessWidget {
       children: [
         const LangSwitcher(dark: true),
         const SizedBox(height: 8),
-        InkWell(
-          onTap: () => context.read<UrlOpener>().open(
-            Uri.parse(AppConfig.handbookUrl),
-            sameTab: true,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: Text(
-              i18n.t('common.handbook'),
-              style: const TextStyle(
-                fontSize: 13,
-                color: AppColors.textDark,
-                decoration: TextDecoration.underline,
-              ),
+        Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 16,
+          children: [
+            _FooterLink(
+              label: i18n.t('common.handbook'),
+              url: AppConfig.handbookUrl,
             ),
-          ),
+            _FooterLink(
+              label: i18n.t('common.privacy'),
+              url: AppConfig.privacyUrl,
+            ),
+          ],
         ),
         const SizedBox(height: 4),
         Text(
@@ -330,6 +327,32 @@ class _Footer extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _FooterLink extends StatelessWidget {
+  const _FooterLink({required this.label, required this.url});
+
+  final String label;
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () =>
+          context.read<UrlOpener>().open(Uri.parse(url), sameTab: true),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 13,
+            color: AppColors.textDark,
+            decoration: TextDecoration.underline,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -30,6 +30,7 @@ Externe Webseiten werden separat geöffnet. So kannst du die JUBL(A)PP anschlies
 ## Kontakt & Support
 
 - **Handbuch** öffnet diese Dokumentation.
+- **Datenschutz** öffnet die [Datenschutzerklärung](datenschutz.md). Du erreichst sie auch auf der Anmeldeseite unter dem Handbuch-Link.
 - **Schar E-Mail** startet eine E-Mail an die hinterlegte Kontaktadresse der Schar.
 - **Feedback** öffnet das Formular für Rückmeldungen und Fehlermeldungen.
 

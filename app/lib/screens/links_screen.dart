@@ -59,9 +59,13 @@ class _LinksScreenState extends State<LinksScreen> {
     if (!opened && mounted) _toast(context.i18n.t('common.open_failed'));
   }
 
-  Future<void> _openHandbook() async {
+  Future<void> _openHandbook() => _openDoc(AppConfig.handbookUrl);
+
+  Future<void> _openPrivacy() => _openDoc(AppConfig.privacyUrl);
+
+  Future<void> _openDoc(String url) async {
     final opened = await context.read<UrlOpener>().open(
-      Uri.parse(AppConfig.handbookUrl),
+      Uri.parse(url),
       sameTab: true,
     );
     if (!opened && mounted) _toast(context.i18n.t('common.open_failed'));
@@ -182,6 +186,12 @@ class _LinksScreenState extends State<LinksScreen> {
                 title: context.t('links.handbook'),
                 subtitle: context.t('links.handbook_subtitle'),
                 onTap: _openHandbook,
+              ),
+              ListBlockItem(
+                icon: FontAwesomeIcons.shieldHalved,
+                title: context.t('common.privacy'),
+                subtitle: context.t('links.privacy_subtitle'),
+                onTap: _openPrivacy,
               ),
               ListBlockItem(
                 icon: FontAwesomeIcons.envelope,
