@@ -1,22 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
+  "extends": ["config:recommended"],
+  "ignoreDeps": ["dev.flutter.flutter-plugin-loader"],
   "packageRules": [
     {
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
+      "matchUpdateTypes": ["minor", "patch"],
       "groupName": "all non-major dependencies",
-      "schedule": [
-        "every 2 weeks on Monday"
-      ],
+      "schedule": ["every 2 weeks on Monday"],
       "automerge": true
     }
-  ],
-  "ignoreDeps": [
-    "dev.flutter.flutter-plugin-loader"
   ]
 }
