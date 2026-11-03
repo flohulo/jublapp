@@ -25,6 +25,7 @@
   "login.pin_placeholder": "• • • •",
   "login.submit": "Einloggen",
   "login.error_invalid": "Falscher PIN.",
+  "login.error_rate_limited": "Zu viele Fehlversuche. Bitte in 15 Minuten erneut versuchen.",
   "login.error_failed": "Anmeldung nicht möglich. Bitte Verbindung prüfen und erneut versuchen.",
 
   "uebersicht.title": "Übersicht",

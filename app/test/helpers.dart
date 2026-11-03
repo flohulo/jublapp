@@ -106,6 +106,7 @@ class TestEnv {
     this.formStatus = 200,
     this.scharEmail = 'schar@example.ch',
     this.weatherFails = false,
+    this.loginRateLimited = false,
   });
 
   final String pin;
@@ -115,6 +116,7 @@ class TestEnv {
   int formStatus;
   String scharEmail;
   bool weatherFails;
+  bool loginRateLimited;
 
   final List<RecordedRequest> requests = [];
   final opener = FakeUrlOpener();
@@ -147,6 +149,13 @@ class TestEnv {
     final json = {'content-type': 'application/json; charset=utf-8'};
     switch (request.url.path) {
       case '/api/login':
+        if (loginRateLimited) {
+          return http.Response(
+            '{"error":"Too many attempts"}',
+            429,
+            headers: json,
+          );
+        }
         if (Uri.splitQueryString(body)['pin'] == pin) {
           return http.Response(
             '{"ok":true}',

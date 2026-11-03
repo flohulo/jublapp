@@ -80,6 +80,21 @@ void main() {
   });
 
   group('Login', () {
+    testWidgets('zu viele Fehlversuche (429) zeigen eine eigene Meldung', (
+      tester,
+    ) async {
+      final env = TestEnv(loginRateLimited: true);
+      await env.pumpApp(tester, loggedIn: false);
+      await enter(tester, 'pin-field', '9999');
+      await tapKey(tester, 'login-button');
+      await tester.pumpAndSettle();
+      expect(
+        find.text('Zu viele Fehlversuche. Bitte in 15 Minuten erneut versuchen.'),
+        findsOneWidget,
+      );
+      expect(env.auth.loggedIn, isFalse);
+    });
+
     testWidgets('falscher PIN zeigt Fehler und bleibt auf Login', (
       tester,
     ) async {

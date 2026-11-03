@@ -55,9 +55,11 @@ class _LoginScreenState extends State<LoginScreen>
     setState(() {
       _busy = false;
       _error = true;
-      _errorKey = result == LoginResult.invalidPin
-          ? 'login.error_invalid'
-          : 'login.error_failed';
+      _errorKey = switch (result) {
+        LoginResult.invalidPin => 'login.error_invalid',
+        LoginResult.rateLimited => 'login.error_rate_limited',
+        _ => 'login.error_failed',
+      };
     });
     _shake.forward(from: 0);
   }

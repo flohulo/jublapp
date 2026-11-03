@@ -10,7 +10,7 @@ exports.handler = async (event) => {
   return {
     statusCode: 204,
     headers: {
-      "Set-Cookie": "auth=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0",
+      "Set-Cookie": "auth=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0",
     },
     body: "",
   };
