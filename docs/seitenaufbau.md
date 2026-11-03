@@ -2,10 +2,6 @@
 
 Die JUBL(A)PP ist für die Bedienung auf dem Smartphone ausgelegt. Die meisten Seiten folgen demselben Grundprinzip: Eine Kopfzeile zeigt, wo du bist und welche Aktionen verfügbar sind; darunter findest du Formulare oder direkt anwählbare Bereiche.
 
-![Schematische Darstellung des Aufbaus einer Formularseite in der JUBL(A)PP](assets/seitenaufbau.svg)
-
-_Die Abbildung ist eine schematische Orientierung und kein Screenshot der App. Je nach Funktion unterscheidet sich der Inhalt unter der Kopfzeile._
-
 ## Navigation
 
 Der typische Weg zu einer Funktion ist:
