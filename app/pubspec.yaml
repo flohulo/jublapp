@@ -2,8 +2,7 @@ name: jublapp
 description: "JUBL(A)PP – Reporting-Tool für Jubla Wald/ZH"
 publish_to: 'none'
 
-# Wird von update-version.js aus package.json übernommen.
-version: 0.10.0 # x-release-please-version
+version: 0.10.0
 
 environment:
   sdk: ^3.12.0
