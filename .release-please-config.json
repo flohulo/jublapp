@@ -64,7 +64,17 @@
     ".": {
       "release-type": "node",
       "package-name": "jubla-reporting",
-      "changelog-path": "CHANGELOG.md"
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        {
+          "type": "generic",
+          "path": "app/pubspec.yaml"
+        },
+        {
+          "type": "generic",
+          "path": "app/lib/version.dart"
+        }
+      ]
     }
   }
 }
