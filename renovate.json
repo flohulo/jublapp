@@ -4,6 +4,10 @@
   "ignoreDeps": ["dev.flutter.flutter-plugin-loader"],
   "packageRules": [
     {
+      "matchManagers": ["gradle", "gradle-wrapper"],
+      "enabled": false
+    },
+    {
       "matchUpdateTypes": ["minor", "patch"],
       "groupName": "all non-major dependencies",
       "schedule": ["every 2 weeks on Monday"],
