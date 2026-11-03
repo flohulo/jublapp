@@ -68,96 +68,89 @@ class _LoginScreenState extends State<LoginScreen>
   Widget build(BuildContext context) {
     final i18n = context.watch<I18n>();
     return Scaffold(
-      backgroundColor: AppColors.bgOuter,
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: AppTheme.maxContentWidth),
-          child: Material(
-            color: Colors.white,
-            elevation: 4,
-            shadowColor: Colors.black26,
-            child: SafeArea(
-              child: LayoutBuilder(
-                builder: (context, constraints) => SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: constraints.maxHeight,
-                    ),
-                    child: IntrinsicHeight(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
-                        child: Column(
-                          children: [
-                            const Text(
-                              'JUBL(A)PP',
-                              style: TextStyle(
-                                fontSize: 36,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                            const SizedBox(height: 25),
-                            Text(
-                              i18n.t('login.greeting'),
-                              style: const TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                            const SizedBox(height: 25),
-                            Text(
-                              i18n.t('login.group_name'),
-                              style: const TextStyle(
-                                fontSize: 28,
-                                fontWeight: FontWeight.bold,
-                                color: AppColors.primary,
-                              ),
-                            ),
-                            const SizedBox(height: 50),
-                            AnimatedBuilder(
-                              animation: _shake,
-                              builder: (context, child) {
-                                final t = _shake.value;
-                                final dx = t == 0 || t == 1
-                                    ? 0.0
-                                    : (t < 0.33
-                                          ? -5.0
-                                          : (t < 0.66 ? 5.0 : -5.0));
-                                return Transform.translate(
-                                  offset: Offset(dx, 0),
-                                  child: child,
-                                );
-                              },
-                              child: _LoginForm(
-                                controller: _pin,
-                                busy: _busy,
-                                error: _error,
-                                onSubmit: _submit,
-                                placeholder: i18n.t('login.pin_placeholder'),
-                                buttonLabel: i18n.t('login.submit'),
-                              ),
-                            ),
-                            if (_error && _errorKey.isNotEmpty)
-                              Padding(
-                                padding: const EdgeInsets.only(top: 12),
-                                child: Semantics(
-                                  liveRegion: true,
-                                  child: Text(
-                                    i18n.t(_errorKey),
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: AppColors.error,
-                                    ),
-                                  ),
+      backgroundColor: Colors.white,
+      body: Material(
+        color: Colors.white,
+        child: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) => SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
+                ),
+                child: IntrinsicHeight(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+                    child: Column(
+                      children: [
+                        const Text(
+                          'JUBL(A)PP',
+                          style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 25),
+                        Text(
+                          i18n.t('login.greeting'),
+                          style: const TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        const SizedBox(height: 25),
+                        Text(
+                          i18n.t('login.group_name'),
+                          style: const TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                        const SizedBox(height: 50),
+                        AnimatedBuilder(
+                          animation: _shake,
+                          builder: (context, child) {
+                            final t = _shake.value;
+                            final dx = t == 0 || t == 1
+                                ? 0.0
+                                : (t < 0.33
+                                      ? -5.0
+                                      : (t < 0.66 ? 5.0 : -5.0));
+                            return Transform.translate(
+                              offset: Offset(dx, 0),
+                              child: child,
+                            );
+                          },
+                          child: _LoginForm(
+                            controller: _pin,
+                            busy: _busy,
+                            error: _error,
+                            onSubmit: _submit,
+                            placeholder: i18n.t('login.pin_placeholder'),
+                            buttonLabel: i18n.t('login.submit'),
+                          ),
+                        ),
+                        if (_error && _errorKey.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12),
+                            child: Semantics(
+                              liveRegion: true,
+                              child: Text(
+                                i18n.t(_errorKey),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: AppColors.error,
                                 ),
                               ),
-                            const SizedBox(height: 40),
-                            const Spacer(),
-                            const _Footer(),
-                          ],
-                        ),
-                      ),
+                            ),
+                          ),
+                        const SizedBox(height: 40),
+                        const Spacer(),
+                        const _Footer(),
+                      ],
                     ),
                   ),
                 ),
