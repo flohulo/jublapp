@@ -7,8 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:jublapp/i18n/i18n.dart';
 
-/// Kontrolle der Mehrsprachigkeit: Quelle der Wahrheit ist `../locales/`
-/// (Weblate); `assets/locales/` ist die Spiegelung für die App.
+/// Kontrolle der Mehrsprachigkeit: Die einzige Quelle der Übersetzungen ist
+/// `assets/locales/`.
 Map<String, String> _load(String dir, String lang) {
   final raw = File('$dir/$lang.json').readAsStringSync();
   return (jsonDecode(raw) as Map<String, dynamic>).map(
@@ -21,17 +21,7 @@ Set<String> _placeholders(String text) =>
 
 void main() {
   const langs = I18n.supported;
-  final source = {for (final l in langs) l: _load('../locales', l)};
-  final assets = {for (final l in langs) l: _load('assets/locales', l)};
-
-  test(
-    'Quell-Locales und App-Assets sind identisch (npm run build ausführen)',
-    () {
-      for (final l in langs) {
-        expect(assets[l], source[l], reason: 'assets/locales/$l.json veraltet');
-      }
-    },
-  );
+  final source = {for (final l in langs) l: _load('assets/locales', l)};
 
   test('alle Sprachen haben exakt dieselben Schlüssel wie Deutsch', () {
     final de = source['de']!.keys.toSet();

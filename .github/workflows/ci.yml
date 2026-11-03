@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   # Analyse + Tests. Die Tests prüfen auch die Mehrsprachigkeit: alle Sprachen
-  # haben dieselben Schlüssel/Platzhalter und app/assets/locales spiegelt locales/.
+  # haben dieselben Schlüssel/Platzhalter.
   test:
     name: Analyse und Tests
     runs-on: ubuntu-latest

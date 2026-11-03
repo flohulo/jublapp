@@ -58,13 +58,12 @@ Die Version wird in `package.json` gepflegt. Vor einem Push auf `main` die Versi
 
 ## Übersetzungen
 
-Übersetzungen werden über [Weblate auf Codeberg](https://translate.codeberg.org) verwaltet und synchronisiert.
+Alle Übersetzungen liegen an einem einzigen Ort: `app/assets/locales/*.json`. Es gibt keine Kopie und keinen externen Übersetzungsdienst.
 
-- **Quell-Sprache**: Deutsch (`locales/de.json`)
+- **Quell-Sprache**: Deutsch (`app/assets/locales/de.json`)
 - **Unterstützte Sprachen**: Deutsch (`de`), Französisch (`fr`), Italienisch (`it`), Englisch (`en`)
-- Die Übersetzungsdateien liegen unter `locales/*.json` und werden mit `npm run build` (`update-version.js`) nach `app/assets/locales/` gespiegelt. Der Flutter-Test `app/test/i18n_test.dart` schlägt fehl, wenn Sprachen unterschiedliche Schlüssel/Platzhalter haben oder die Spiegelung veraltet ist.
-- Neue UI-Texte werden in `locales/de.json` erfasst und in der App über `context.t('schluessel')` eingebunden (neue Schlüssel in allen vier Sprachen ergänzen).
-- Weblate übernimmt Änderungen automatisch über Pull Requests bzw. Commits auf das Codeberg-Repository.
+- Neue UI-Texte werden in `de.json` erfasst und in der App über `context.t('schluessel')` eingebunden. Neue Schlüssel in allen vier Sprachen ergänzen.
+- Der Flutter-Test `app/test/i18n_test.dart` schlägt fehl, wenn Sprachen unterschiedliche Schlüssel oder Platzhalter haben.
 
 ## Pull Requests
 

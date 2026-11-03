@@ -13,6 +13,5 @@ flutter build windows --release
 - Native Apps sprechen mit `https://jubla-wald-reporting.netlify.app`
   (überschreibbar: `--dart-define=API_BASE_URL=https://...`).
 - Das Web-Build nutzt relative URLs (gleiche Origin wie Backend, Cookie-Login).
-- Übersetzungen: Quelle ist `../locales/*.json` (Weblate). `node ../update-version.js`
-  spiegelt sie nach `assets/locales/`. Der Test `test/i18n_test.dart` prüft
-  Schlüssel, Platzhalter und Spiegelung.
+- Übersetzungen: einziger Ort ist `assets/locales/*.json`. Der Test
+  `test/i18n_test.dart` prüft Schlüssel und Platzhalter.

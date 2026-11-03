@@ -45,7 +45,7 @@ flowchart LR
 | `backend/functions/`      | Netlify Functions (API-Endpunkte)                   |
 | `backend/edge-functions/` | Auth-Prüfung vor allen Daten-Endpunkten             |
 | `web-extras/forms.html`   | Formular-Deklaration für Netlify Forms              |
-| `locales/`                | Übersetzungen (Deutsch, Französisch, Italienisch, Englisch) |
+| `app/assets/locales/`     | Übersetzungen (Deutsch, Französisch, Italienisch, Englisch) |
 | `docs/`                   | Handbuch (MkDocs)                                   |
 
 ## Loslegen

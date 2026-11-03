@@ -37,19 +37,4 @@ fs.writeFileSync(
   "utf8",
 );
 
-// 4. locales (Weblate-Quelle) in die App-Assets spiegeln
-const localesSrc = path.join(__dirname, "locales");
-const localesDest = path.join(appDir, "assets", "locales");
-if (fs.existsSync(localesSrc)) {
-  fs.mkdirSync(localesDest, { recursive: true });
-  for (const file of fs.readdirSync(localesSrc)) {
-    if (file.endsWith(".json")) {
-      fs.copyFileSync(
-        path.join(localesSrc, file),
-        path.join(localesDest, file),
-      );
-    }
-  }
-}
-
 console.log("Fertig!");
