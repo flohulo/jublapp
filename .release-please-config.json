@@ -63,7 +63,7 @@
   "packages": {
     ".": {
       "release-type": "node",
-      "package-name": "jubla-reporting",
+      "package-name": "JUBL(A)PP",
       "changelog-path": "CHANGELOG.md",
       "extra-files": [
         {

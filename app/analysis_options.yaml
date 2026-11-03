@@ -1,6 +1,12 @@
 # Statische Analyse für die Flutter-App (`flutter analyze`).
 # Weitere Regeln: https://dart.dev/tools/linter-rules
 
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - web/**
+    - windows/**
 include: package:flutter_lints/flutter.yaml
 
 linter:
