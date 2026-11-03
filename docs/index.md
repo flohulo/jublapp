@@ -12,6 +12,7 @@ Willkommen im Handbuch für die JUBL(A)PP! Hier findest du alle Informationen, u
 - **[Wetter](wetter.md)**: Aktuelles Wetter und Prognose für Wald/ZH.
 - **[Links](links.md)**: Notfallnummern, Webseiten und Kontakte finden.
 - **[Lager](lager.md)**: Padlet der Schar für das Lager.
+- **[Datenschutz](datenschutz.md)**: Welche Daten die App verarbeitet.
 - **[Über die App](about.md)**: Informationen zur JUBL(A)PP.
 
 ## Feedback, Fragen, Verbesserungen
