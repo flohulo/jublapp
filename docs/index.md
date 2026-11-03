@@ -9,6 +9,7 @@ Willkommen im Handbuch für die JUBL(A)PP! Hier findest du alle Informationen, u
 - **[Funktionen](funktionen.md)**: Überblick über die Funktionen mit Links zu den Detailanleitungen.
 - **[Strike-Verwaltung](strike.md)**: Strikes dokumentieren und absenden.
 - **[Ereignis melden](ereignis.md)**: Unfälle, Vorfälle und Sachschäden erfassen.
+- **[Wetter](wetter.md)**: Aktuelles Wetter und Prognose für Wald/ZH.
 - **[Links](links.md)**: Notfallnummern, Webseiten und Kontakte finden.
 - **[Lager](lager.md)**: Padlet der Schar für das Lager.
 - **[Über die App](about.md)**: Informationen zur JUBL(A)PP.
