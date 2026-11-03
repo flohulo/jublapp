@@ -65,8 +65,6 @@ Mehr dazu, zur Projektstruktur und zu Übersetzungen steht in [CONTRIBUTING.md](
 
 Beiträge sind willkommen. Bitte lies zuerst [CONTRIBUTING.md](CONTRIBUTING.md). Sicherheitsprobleme meldest du privat gemäss [SECURITY.md](SECURITY.md).
 
-Vor jedem Push auf `main`: Version in `package.json` angepasst?
-
 ## Lizenz
 
 [GNU Affero General Public License v3.0](LICENSE)
