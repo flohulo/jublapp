@@ -15,13 +15,16 @@ const buildNumber = major * 10000 + minor * 100 + patch;
 
 const appDir = path.join(__dirname, "app");
 
+// Die Kommentare `x-release-please-version` markieren die Zeilen, die release-please
+// im Release-PR mitschreibt (siehe `extra-files` in .release-please-config.json).
+
 // 2. pubspec.yaml patschen
 const pubspecPath = path.join(appDir, "pubspec.yaml");
 if (fs.existsSync(pubspecPath)) {
   let pubspec = fs.readFileSync(pubspecPath, "utf8");
   pubspec = pubspec.replace(
     /^version:\s*.+$/m,
-    `version: ${version}+${buildNumber}`,
+    `version: ${version}+${buildNumber} # x-release-please-version`,
   );
   fs.writeFileSync(pubspecPath, pubspec, "utf8");
 }
@@ -30,7 +33,7 @@ if (fs.existsSync(pubspecPath)) {
 const versionDartPath = path.join(appDir, "lib", "version.dart");
 fs.writeFileSync(
   versionDartPath,
-  `// GENERIERT von update-version.js aus package.json – nicht von Hand ändern.\nconst String appVersion = '${version}';\n`,
+  `// GENERIERT von update-version.js aus package.json – nicht von Hand ändern.\nconst String appVersion = '${version}'; // x-release-please-version\n`,
   "utf8",
 );
 
