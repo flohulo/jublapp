@@ -7,7 +7,10 @@ const SECRET = "s".repeat(40);
 
 function withEnv({ pin, secret = SECRET }, fn) {
   return async () => {
-    const before = { PIN: process.env.PIN, SESSION_SECRET: process.env.SESSION_SECRET };
+    const before = {
+      PIN: process.env.PIN,
+      SESSION_SECRET: process.env.SESSION_SECRET,
+    };
     if (pin === undefined) delete process.env.PIN;
     else process.env.PIN = pin;
     if (secret === undefined) delete process.env.SESSION_SECRET;

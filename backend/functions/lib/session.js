@@ -56,7 +56,9 @@ function verifySessionToken(token, now = Date.now) {
   if (expires <= Math.floor(now() / 1000)) return false;
   const expected = Buffer.from(sign(cfg, id, expires), "hex");
   const given = Buffer.from(signature, "hex");
-  return given.length === expected.length && crypto.timingSafeEqual(given, expected);
+  return (
+    given.length === expected.length && crypto.timingSafeEqual(given, expected)
+  );
 }
 
 module.exports = {

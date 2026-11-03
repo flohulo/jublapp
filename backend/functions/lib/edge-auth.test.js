@@ -36,20 +36,33 @@ function withEnv(env, fn) {
 
 const ok = { PIN: "123456", SESSION_SECRET: SECRET };
 
-test("gültiges Token wird durchgelassen, Login-Pfade sind öffentlich", withEnv(ok, async () => {
-  const token = createSessionToken();
-  assert.equal(await edge(`auth=${token}`), "next");
-  assert.equal(await edge(undefined, "/api/login"), "next");
-}));
+test(
+  "gültiges Token wird durchgelassen, Login-Pfade sind öffentlich",
+  withEnv(ok, async () => {
+    const token = createSessionToken();
+    assert.equal(await edge(`auth=${token}`), "next");
+    assert.equal(await edge(undefined, "/api/login"), "next");
+  }),
+);
 
-test("ohne Cookie, mit verändertem oder abgelaufenem Token: 401", withEnv(ok, async () => {
-  assert.equal(await edge(undefined), 401);
-  const token = createSessionToken();
-  assert.equal(await edge(`auth=${token.slice(0, -1)}${token.endsWith("0") ? "1" : "0"}`), 401);
-  const expired = createSessionToken(() => Date.now() - 31 * 24 * 3600 * 1000);
-  assert.equal(await edge(`auth=${expired}`), 401);
-  assert.equal(await edge("auth=nonsense"), 401);
-}));
+test(
+  "ohne Cookie, mit verändertem oder abgelaufenem Token: 401",
+  withEnv(ok, async () => {
+    assert.equal(await edge(undefined), 401);
+    const token = createSessionToken();
+    assert.equal(
+      await edge(
+        `auth=${token.slice(0, -1)}${token.endsWith("0") ? "1" : "0"}`,
+      ),
+      401,
+    );
+    const expired = createSessionToken(
+      () => Date.now() - 31 * 24 * 3600 * 1000,
+    );
+    assert.equal(await edge(`auth=${expired}`), 401);
+    assert.equal(await edge("auth=nonsense"), 401);
+  }),
+);
 
 test("PIN-Änderung oder fehlende Konfiguration: 401", async () => {
   let token;

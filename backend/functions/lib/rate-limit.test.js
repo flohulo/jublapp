@@ -60,7 +60,10 @@ test("clientKey nutzt die Netlify-IP und speichert nur einen Hash", () => {
     },
   });
   assert.match(key, /^[0-9a-f]{64}$/);
-  assert.notEqual(key, clientKey({ headers: { "x-forwarded-for": "198.51.100.1" } }));
+  assert.notEqual(
+    key,
+    clientKey({ headers: { "x-forwarded-for": "198.51.100.1" } }),
+  );
   assert.equal(
     clientKey({ headers: { "x-forwarded-for": "198.51.100.1, 10.0.0.1" } }),
     clientKey({ headers: { "client-ip": "198.51.100.1" } }),

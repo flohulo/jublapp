@@ -7,7 +7,9 @@
     "build": "node update-version.js",
     "build:web": "bash scripts/build-web.sh",
     "test:backend": "node --test \"backend/functions/lib/*.test.js\"",
-    "test": "npm run test:backend && cd app && flutter analyze && flutter test"
+    "test": "npm run test:backend && cd app && flutter analyze && flutter test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@netlify/blobs": "11.1.7",
@@ -17,6 +19,7 @@
     "nodemailer": "10.3.1"
   },
   "devDependencies": {
-    "netlify-cli": "27.16.0"
+    "netlify-cli": "27.16.0",
+    "prettier": "3.9.10"
   }
 }

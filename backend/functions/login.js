@@ -78,7 +78,10 @@ exports.handler = async (event) => {
     try {
       await limiter.reset(key);
     } catch (e) {
-      console.error("Login-Zähler konnte nicht zurückgesetzt werden:", e && e.message);
+      console.error(
+        "Login-Zähler konnte nicht zurückgesetzt werden:",
+        e && e.message,
+      );
     }
     return {
       statusCode: 200,

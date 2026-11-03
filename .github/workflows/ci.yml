@@ -27,6 +27,12 @@ jobs:
         with:
           node-version: 22
 
+      - name: Abhängigkeiten laden
+        run: npm ci
+
+      - name: Formatierung prüfen
+        run: npm run format:check
+
       - name: Backend-Tests
         run: node --test "backend/functions/lib/*.test.js"
 

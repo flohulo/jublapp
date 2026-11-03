@@ -31,7 +31,10 @@ function createLimiter(store, now = Date.now) {
   function blockedResult(state) {
     return {
       blocked: true,
-      retryAfter: Math.max(1, Math.ceil((state.first + WINDOW_MS - now()) / 1000)),
+      retryAfter: Math.max(
+        1,
+        Math.ceil((state.first + WINDOW_MS - now()) / 1000),
+      ),
     };
   }
 

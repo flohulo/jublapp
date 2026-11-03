@@ -49,60 +49,95 @@ function withEnv(pin, fn, secret = SECRET) {
   };
 }
 
-test("richtiger PIN: Cookie mit Secure und HttpOnly", withEnv("123456", async () => {
-  const res = await login("123456");
-  assert.equal(res.statusCode, 200);
-  const cookie = res.headers["Set-Cookie"];
-  assert.match(cookie, /; HttpOnly; Secure; SameSite=Lax;/);
-  assert.equal(verifyAuth({ headers: { cookie: cookie.split(";")[0] } }), true);
-}));
+test(
+  "richtiger PIN: Cookie mit Secure und HttpOnly",
+  withEnv("123456", async () => {
+    const res = await login("123456");
+    assert.equal(res.statusCode, 200);
+    const cookie = res.headers["Set-Cookie"];
+    assert.match(cookie, /; HttpOnly; Secure; SameSite=Lax;/);
+    assert.equal(
+      verifyAuth({ headers: { cookie: cookie.split(";")[0] } }),
+      true,
+    );
+  }),
+);
 
-test("falscher PIN: 401, nach 5 Fehlversuchen 429 mit Retry-After, auch mit richtigem PIN", withEnv("123456", async () => {
-  for (let i = 1; i < rateLimit.MAX_FAILURES; i++) {
-    assert.equal((await login("000000")).statusCode, 401);
-  }
-  const blocked = await login("000000");
-  assert.equal(blocked.statusCode, 429);
-  assert.ok(Number(blocked.headers["Retry-After"]) > 0);
-  const correct = await login("123456");
-  assert.equal(correct.statusCode, 429);
-  assert.equal(correct.headers["Set-Cookie"], undefined);
-}));
+test(
+  "falscher PIN: 401, nach 5 Fehlversuchen 429 mit Retry-After, auch mit richtigem PIN",
+  withEnv("123456", async () => {
+    for (let i = 1; i < rateLimit.MAX_FAILURES; i++) {
+      assert.equal((await login("000000")).statusCode, 401);
+    }
+    const blocked = await login("000000");
+    assert.equal(blocked.statusCode, 429);
+    assert.ok(Number(blocked.headers["Retry-After"]) > 0);
+    const correct = await login("123456");
+    assert.equal(correct.statusCode, 429);
+    assert.equal(correct.headers["Set-Cookie"], undefined);
+  }),
+);
 
-test("erfolgreicher Login setzt den Zähler zurück", withEnv("123456", async () => {
-  for (let i = 1; i < rateLimit.MAX_FAILURES; i++) await login("000000");
-  assert.equal((await login("123456")).statusCode, 200);
-  for (let i = 1; i < rateLimit.MAX_FAILURES; i++) {
-    assert.equal((await login("000000")).statusCode, 401);
-  }
-}));
+test(
+  "erfolgreicher Login setzt den Zähler zurück",
+  withEnv("123456", async () => {
+    for (let i = 1; i < rateLimit.MAX_FAILURES; i++) await login("000000");
+    assert.equal((await login("123456")).statusCode, 200);
+    for (let i = 1; i < rateLimit.MAX_FAILURES; i++) {
+      assert.equal((await login("000000")).statusCode, 401);
+    }
+  }),
+);
 
-test("ohne gesetzten PIN ist kein Login möglich", withEnv(undefined, async () => {
-  const res = await login("");
-  assert.equal(res.statusCode, 503);
-  assert.equal(res.headers["Set-Cookie"], undefined);
-}));
+test(
+  "ohne gesetzten PIN ist kein Login möglich",
+  withEnv(undefined, async () => {
+    const res = await login("");
+    assert.equal(res.statusCode, 503);
+    assert.equal(res.headers["Set-Cookie"], undefined);
+  }),
+);
 
-test("Zähler nicht erreichbar: Login wird verweigert", withEnv("123456", async () => {
-  rateLimit.getLoginLimiter = () => {
-    throw new Error("Blobs nicht verfügbar");
-  };
-  assert.equal((await login("123456")).statusCode, 503);
-}));
+test(
+  "Zähler nicht erreichbar: Login wird verweigert",
+  withEnv("123456", async () => {
+    rateLimit.getLoginLimiter = () => {
+      throw new Error("Blobs nicht verfügbar");
+    };
+    assert.equal((await login("123456")).statusCode, 503);
+  }),
+);
 
-test("ohne SESSION_SECRET ist kein Login möglich", withEnv("123456", async () => {
-  const res = await login("123456");
-  assert.equal(res.statusCode, 503);
-  assert.equal(res.headers["Set-Cookie"], undefined);
-}, null));
+test(
+  "ohne SESSION_SECRET ist kein Login möglich",
+  withEnv(
+    "123456",
+    async () => {
+      const res = await login("123456");
+      assert.equal(res.statusCode, 503);
+      assert.equal(res.headers["Set-Cookie"], undefined);
+    },
+    null,
+  ),
+);
 
-test("zu kurzes SESSION_SECRET wird abgelehnt", withEnv("123456", async () => {
-  assert.equal((await login("123456")).statusCode, 503);
-}, "kurz"));
+test(
+  "zu kurzes SESSION_SECRET wird abgelehnt",
+  withEnv(
+    "123456",
+    async () => {
+      assert.equal((await login("123456")).statusCode, 503);
+    },
+    "kurz",
+  ),
+);
 
-test("jede Anmeldung bekommt ein anderes Token, ohne PIN darin", withEnv("123456", async () => {
-  const a = (await login("123456")).headers["Set-Cookie"].split(";")[0];
-  const b = (await login("123456")).headers["Set-Cookie"].split(";")[0];
-  assert.notEqual(a, b);
-  assert.equal(a.includes("123456"), false);
-}));
+test(
+  "jede Anmeldung bekommt ein anderes Token, ohne PIN darin",
+  withEnv("123456", async () => {
+    const a = (await login("123456")).headers["Set-Cookie"].split(";")[0];
+    const b = (await login("123456")).headers["Set-Cookie"].split(";")[0];
+    assert.notEqual(a, b);
+    assert.equal(a.includes("123456"), false);
+  }),
+);

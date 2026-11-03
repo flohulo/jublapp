@@ -1,0 +1,10 @@
+node_modules
+dist
+app
+docs
+.netlify
+package-lock.json
+CHANGELOG.md
+*.md
+*.yml
+*.yaml
