@@ -3,6 +3,7 @@
 const { getAccessToken } = require("./lib/google-auth");
 const { appendRow } = require("./lib/sheets-api");
 const { uploadToDrive } = require("./lib/drive-api");
+const { validateFoto } = require("./lib/foto");
 const { sendMail } = require("./lib/mailer");
 
 const SHEET_NAME = "Ereignisse";
@@ -55,11 +56,17 @@ exports.handler = async (event) => {
     massnahmen,
     timestamp,
     fotoBase64,
-    fotoMimeType,
   } = body;
 
   if (!datum || !melder || !art) {
     return err("Fehlende Pflichtfelder", 400);
+  }
+
+  // Typ und Endung kommen aus den Bytes des Fotos, nicht vom Client.
+  let foto = null;
+  if (fotoBase64) {
+    foto = validateFoto(fotoBase64);
+    if (!foto.ok) return err(foto.error, 400);
   }
 
   try {
@@ -70,16 +77,16 @@ exports.handler = async (event) => {
     let attachments = [];
 
     // Foto hochladen
-    if (fotoBase64) {
+    if (foto) {
       try {
         const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID || "";
-        const filename = `ereignis_${datum.replace(/\./g, "-")}_${Date.now()}.jpg`;
+        const filename = `ereignis_${String(datum).replace(/[^0-9A-Za-z]/g, "-")}_${Date.now()}.${foto.ext}`;
 
         const driveRes = await uploadToDrive(
           token,
           fotoBase64,
           filename,
-          fotoMimeType || "image/jpeg",
+          foto.mimeType,
           folderId,
         );
         driveLink = driveRes.webViewLink || driveRes.id || "Hochgeladen";
@@ -87,8 +94,8 @@ exports.handler = async (event) => {
         // Foto als Mail-Anhang vorbereiten
         attachments.push({
           filename: filename,
-          content: Buffer.from(fotoBase64, "base64"),
-          contentType: fotoMimeType || "image/jpeg",
+          content: foto.buffer,
+          contentType: foto.mimeType,
         });
       } catch (e) {
         console.error("Fehler beim Foto-Upload:", e);
