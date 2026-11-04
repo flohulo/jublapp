@@ -106,3 +106,15 @@ test("jede Anmeldung bekommt ein anderes Token, ohne PIN darin", withEnv("123456
   assert.notEqual(a, b);
   assert.equal(a.includes("123456"), false);
 }));
+
+test("PIN als Zahl oder Objekt wird abgelehnt", withEnv("123456", async () => {
+  const res = await handler({
+    httpMethod: "POST",
+    headers: {
+      "content-type": "application/json",
+      "x-nf-client-connection-ip": "203.0.113.8",
+    },
+    body: JSON.stringify({ pin: 123456 }),
+  });
+  assert.equal(res.statusCode, 401);
+}));

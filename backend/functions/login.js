@@ -1,6 +1,13 @@
+const crypto = require("crypto");
 const { corsHeaders } = require("./lib/cors");
 const rateLimit = require("./lib/rate-limit");
 const session = require("./lib/session");
+
+// Vergleicht in konstanter Zeit; über SHA-256 haben beide Seiten gleiche Länge.
+function pinMatches(given, expected) {
+  const hash = (value) => crypto.createHash("sha256").update(value).digest();
+  return crypto.timingSafeEqual(hash(given), hash(expected));
+}
 
 exports.handler = async (event) => {
   const CORS = corsHeaders({ "Content-Type": "application/json" });
@@ -70,7 +77,7 @@ exports.handler = async (event) => {
     };
   }
 
-  if (pin === expectedPin) {
+  if (typeof pin === "string" && pinMatches(pin, expectedPin)) {
     const token = session.createSessionToken();
     try {
       await limiter.reset(key);

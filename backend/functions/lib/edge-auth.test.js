@@ -46,7 +46,7 @@ test("ohne Cookie, mit verändertem oder abgelaufenem Token: 401", withEnv(ok, a
   assert.equal(await edge(undefined), 401);
   const token = createSessionToken();
   assert.equal(await edge(`auth=${token.slice(0, -1)}${token.endsWith("0") ? "1" : "0"}`), 401);
-  const expired = createSessionToken(() => Date.now() - 31 * 24 * 3600 * 1000);
+  const expired = createSessionToken(() => Date.now() - 4 * 24 * 3600 * 1000);
   assert.equal(await edge(`auth=${expired}`), 401);
   assert.equal(await edge("auth=nonsense"), 401);
 }));

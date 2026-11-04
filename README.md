@@ -33,8 +33,8 @@ Die Anleitungen für Leitende stehen im Handbuch (Quelltext in [`docs/`](docs/in
 ```mermaid
 flowchart LR
     App["Flutter-App<br/>Web, Android, Windows"] -->|"/api/*"| Edge["Edge Function<br/>auth"]
-    Edge --> Fn["Netlify Functions<br/>strikes, ereignis, kalender, ..."]
-    Fn --> Google["Google<br/>Sheets und Drive"]
+    Edge --> Fn["Netlify Functions<br/>strikes, Login, Konfiguration, Monatsexport"]
+    Fn --> Google["Google<br/>Sheets"]
     App -->|"Formulare"| Forms["Netlify Forms<br/>Ereignis, Feedback"]
     App -.->|"Fehlerberichte"| GT["GlitchTip"]
 ```

@@ -39,7 +39,7 @@ test("Token ist gültig, zufällig und enthält weder PIN noch Hash davon", with
   assert.equal(a.includes(sha), false);
 }));
 
-test("Token läuft nach 30 Tagen ab", withEnv({}, () => {
+test("Token läuft nach 3 Tagen ab", withEnv({}, () => {
   const t0 = 1_700_000_000_000;
   const token = createSessionToken(() => t0);
   assert.equal(verifySessionToken(token, () => t0 + (SESSION_SECONDS - 1) * 1000), true);

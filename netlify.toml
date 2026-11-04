@@ -43,6 +43,20 @@
   function = "auth"
   path = "/forms.html"
 
+# Sicherheits-Header für alle Antworten (die spezifischeren Cache-Regeln unten
+# kommen dazu). Die CSP enthält bewusst nur Direktiven, die die Flutter-Web-App
+# nicht berühren; ein script-src/connect-src/frame-src braucht einen Test mit
+# einem echten Build.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000"
+    Permissions-Policy = "payment=(), usb=()"
+    Content-Security-Policy = "frame-ancestors 'self'; base-uri 'self'; object-src 'none'; form-action 'self'"
+
 [[headers]]
   for = "/sw.js"
   [headers.values]

@@ -8,12 +8,21 @@ function getSheetUrl(sheetName, path = "") {
   return `https://sheets.googleapis.com/v4/spreadsheets/${id}/values/${encodeURIComponent(sheetName)}${path}`;
 }
 
+// Mit USER_ENTERED wertet Sheets Eingaben wie "=HYPERLINK(...)" als Formel aus.
+// Texte, die mit einem Formelzeichen beginnen, bekommen ein ' vorangestellt;
+// Sheets zeigt sie dann als reinen Text an. Zahlen und Datumsangaben bleiben
+// unverändert.
+function sanitizeCell(value) {
+  if (typeof value !== "string") return value;
+  return /^[=+\-@\t\r]/.test(value) ? "'" + value : value;
+}
+
 async function appendRow(token, sheetName, row) {
   const url = getSheetUrl(
     sheetName,
     ":append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS",
   );
-  const result = await httpPost(url, JSON.stringify({ values: [row] }), {
+  const result = await httpPost(url, JSON.stringify({ values: [row.map(sanitizeCell)] }), {
     Authorization: "Bearer " + token,
     "Content-Type": "application/json",
   });
@@ -33,4 +42,4 @@ async function getAllRows(token, sheetName) {
   return (parsed.values || []).slice(1); // Skip header row once here
 }
 
-module.exports = { appendRow, getAllRows };
+module.exports = { appendRow, getAllRows, sanitizeCell };

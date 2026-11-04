@@ -22,7 +22,7 @@ Die App ist für Leitende der Schar gedacht. Der Zugang ist mit einem gemeinsame
 
 ### Anmeldung
 
-- Du gibst den PIN ein. Bei Erfolg setzt der Server ein Cookie (`auth`), das 30 Tage gültig ist. Es enthält keinen Namen, sondern nur einen aus dem PIN berechneten Wert.
+- Du gibst den PIN ein. Bei Erfolg setzt der Server ein Cookie (`auth`), das 3 Tage gültig ist. Es enthält keinen Namen, sondern nur einen aus dem PIN berechneten Wert.
 - Um das Erraten des PIN zu erschweren, zählt der Server falsche Eingaben pro Absender. Dafür wird nur ein **Hash der IP-Adresse** gespeichert, nie die Adresse selbst. Der Zähler gilt 15 Minuten.
 
 ### Strikes
@@ -73,7 +73,7 @@ Einige dieser Anbieter haben ihren Sitz oder ihre Server ausserhalb der Schweiz,
 
 ## Wie lange Daten gespeichert werden
 
-- Cookie: 30 Tage oder bis zum Abmelden.
+- Cookie: 3 Tage oder bis zum Abmelden.
 - Zähler gegen PIN-Raten: 15 Minuten.
 - Strikes, Ereignisse und Feedback: `[Aufbewahrungsdauer festlegen, z. B. bis Ende des Scharjahres plus x Monate]`. Danach sollten die Einträge in der Google-Tabelle, in Netlify Forms und im Drive gelöscht werden.
 
