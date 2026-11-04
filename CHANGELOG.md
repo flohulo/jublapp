@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.11.0](https://github.com/flohulo/jublapp/compare/jubla-reporting-v0.10.0...jubla-reporting-v0.11.0) (2026-11-04)
+
+
+### Features
+
+* sicherheits-header in netlify.toml ergänzen ([#52](https://github.com/flohulo/jublapp/issues/52)) ([bcf6ac3](https://github.com/flohulo/jublapp/commit/bcf6ac335153eead92719ce8b064338822d9d293))
+* version auf der login-seite mit dem changelog verlinken ([#47](https://github.com/flohulo/jublapp/issues/47)) ([fe2adcb](https://github.com/flohulo/jublapp/commit/fe2adcb14cc9dfd840f2cfe1eced3faadcfe5c3c))
+
+
+### Bug Fixes
+
+* cors nur für konfigurierte origin freigeben ([#51](https://github.com/flohulo/jublapp/issues/51)) ([13fd324](https://github.com/flohulo/jublapp/commit/13fd3241d084c9294beb982695c2b21bbb9a5a42))
+* formelzeichen in sheets-eingaben als text speichern ([#49](https://github.com/flohulo/jublapp/issues/49)) ([ae4844d](https://github.com/flohulo/jublapp/commit/ae4844d02d2c3fcd0077e2ccb378d667d8056066))
+* gradle-wrapper auf 8.14 zurücksetzen ([#45](https://github.com/flohulo/jublapp/issues/45)) ([2d4a469](https://github.com/flohulo/jublapp/commit/2d4a4693be2af003838085f87a9d94cba068507c))
+* pin-vergleich beim login in konstanter zeit ([#48](https://github.com/flohulo/jublapp/issues/48)) ([15cfbea](https://github.com/flohulo/jublapp/commit/15cfbea0c1e4b5586fd929be56228fc975bc6658))
+* sitzungsdauer von 30 auf 3 tage verkürzen ([#53](https://github.com/flohulo/jublapp/issues/53)) ([24b961a](https://github.com/flohulo/jublapp/commit/24b961abe3213745e99cbdc01f0c4284e73ca46b))
+
 ## [0.10.0](https://github.com/flohulo/jublapp/compare/jubla-reporting-v0.9.0...jubla-reporting-v0.10.0) (2026-11-03)
 
 
