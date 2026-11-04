@@ -1,12 +1,9 @@
+const { corsHeaders } = require("./lib/cors");
 const rateLimit = require("./lib/rate-limit");
 const session = require("./lib/session");
 
 exports.handler = async (event) => {
-  const CORS = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Content-Type": "application/json",
-  };
+  const CORS = corsHeaders({ "Content-Type": "application/json" });
 
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 200, headers: CORS, body: "" };

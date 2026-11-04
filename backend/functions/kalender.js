@@ -1,16 +1,13 @@
 "use strict";
 
 const { google } = require("googleapis");
+const { corsHeaders } = require("./lib/cors");
 const { getAccessToken } = require("./lib/google-auth");
 const { verifyAuth } = require("./lib/auth");
 
 const CALENDAR_ID = process.env.CALENDAR_ID;
 
-const CORS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Content-Type": "application/json",
-};
+const CORS = corsHeaders({ "Content-Type": "application/json" });
 
 const ok = (d = {}) => ({
   statusCode: 200,

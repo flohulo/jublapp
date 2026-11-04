@@ -1,16 +1,13 @@
 "use strict";
 
+const { corsHeaders } = require("./lib/cors");
 const { getAccessToken } = require("./lib/google-auth");
 const { appendRow } = require("./lib/sheets-api");
 const { uploadToDrive } = require("./lib/drive-api");
 const { sendMail } = require("./lib/mailer");
 
 const SHEET_NAME = "Ereignisse";
-const CORS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Content-Type": "application/json",
-};
+const CORS = corsHeaders({ "Content-Type": "application/json" });
 
 const ok = (d = {}) => ({
   statusCode: 200,
