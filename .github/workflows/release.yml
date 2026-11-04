@@ -1,6 +1,7 @@
 name: Release
 
-# release-please pflegt den Release-PR (Changelog + Version in package.json).
+# release-please pflegt den Release-PR (Changelog + Version in package.json);
+# ein Folgeschritt ergänzt dort die Build-Nummer in der pubspec.
 # Wird dieser gemergt, entsteht ein Entwurf-Release; danach werden APK, EXE und
 # Web-ZIP gebaut, angehängt und der Release veröffentlicht. Die Webseite selbst
 # deployt Netlify bei jedem Push auf main.
@@ -25,6 +26,8 @@ jobs:
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
+      prs_created: ${{ steps.release.outputs.prs_created }}
+      pr_branch: ${{ fromJSON(steps.release.outputs.pr || '{}').headBranchName }}
     steps:
       - name: Release-PR erstellen oder aktualisieren
         id: release
@@ -34,6 +37,43 @@ jobs:
           config-file: .release-please-config.json
           manifest-file: .release-please-manifest.json
           skip-github-pull-request: "${{ github.event_name == 'push' && startsWith(github.event.head_commit.message, 'chore: release ') }}"
+
+  # release-please schreibt nur `version: 0.12.0` in die pubspec und lässt die
+  # Build-Nummer weg. Auf dem Release-PR-Branch ergänzt dieser Job sie wieder
+  # (update-version.js), damit die pubspec im Release-Commit vollständig ist.
+  build-number:
+    name: Build-Nummer im Release-PR ergänzen
+    needs: release-please
+    if: needs.release-please.outputs.prs_created == 'true' && needs.release-please.outputs.pr_branch != ''
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release-please.outputs.pr_branch }}
+          # Mit dem Token ausgelöste Pushes starten die CI auf dem Release-PR.
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Version in die App übernehmen
+        run: node update-version.js
+
+      - name: Änderung committen und pushen
+        env:
+          BRANCH: ${{ needs.release-please.outputs.pr_branch }}
+        run: |
+          if git diff --quiet; then
+            echo "Build-Nummer ist bereits eingetragen."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore: build-nummer in pubspec ergänzen"
+          git push origin "HEAD:$BRANCH"
 
   build:
     name: Apps bauen
