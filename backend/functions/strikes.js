@@ -1,5 +1,6 @@
 "use strict";
 
+const { corsHeaders } = require("./lib/cors");
 const { getAccessToken } = require("./lib/google-auth");
 const { appendRow, getAllRows } = require("./lib/sheets-api");
 const { sendMail } = require("./lib/mailer");
@@ -122,11 +123,7 @@ function buildPatternMail(warnings, datum) {
   return { subject: `⚠️ Wiederholungsmuster erkannt – GruStu ${datum}`, text };
 }
 
-const CORS = {
-  "Access-Control-Allow-Origin": process.env.ALLOWED_ORIGIN || "*",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Content-Type": "application/json",
-};
+const CORS = corsHeaders({ "Content-Type": "application/json" });
 const ok = (d = {}) => ({
   statusCode: 200,
   headers: CORS,
