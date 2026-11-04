@@ -11,7 +11,7 @@
 const crypto = require("crypto");
 
 const VERSION = "v1";
-const SESSION_SECONDS = 60 * 60 * 24 * 30; // 30 Tage, wie das Cookie
+const SESSION_SECONDS = 60 * 60 * 24 * 3; // 3 Tage, wie das Cookie
 const MIN_SECRET_LENGTH = 32;
 
 function config() {

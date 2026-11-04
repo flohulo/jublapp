@@ -6,7 +6,7 @@ import 'error_reporter.dart';
 
 enum LoginResult { success, invalidPin, rateLimited, failed }
 
-/// Anmeldezustand (PIN-Login gegen `/api/login`, 30 Tage gültiges Cookie).
+/// Anmeldezustand (PIN-Login gegen `/api/login`, 3 Tage gültiges Cookie).
 class AuthService extends ChangeNotifier {
   AuthService(this._api, this._prefs, this._reporter) {
     if (_api.manageCookie) {
