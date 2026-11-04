@@ -1,6 +1,6 @@
 {
   "name": "jubla-reporting",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Jubla Wald ZH – Reporting Tool",
   "scripts": {
     "dev": "npm run build:web && netlify dev",
