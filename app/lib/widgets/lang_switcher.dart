@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../i18n/i18n.dart';
 import '../theme.dart';
 
-/// DE | FR | IT | EN – wechselt die Sprache sofort (ohne Neuladen).
+/// DE | GSW | FR | IT | EN – wechselt die Sprache sofort (ohne Neuladen).
 class LangSwitcher extends StatelessWidget {
   const LangSwitcher({super.key, this.dark = false});
 

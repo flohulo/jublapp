@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class I18n extends ChangeNotifier {
   I18n._(this._translations, this._lang, this._prefs);
 
-  static const List<String> supported = ['de', 'fr', 'it', 'en'];
+  static const List<String> supported = ['de', 'gsw', 'fr', 'it', 'en'];
   static const String defaultLang = 'de';
   static const String storageKey = 'lang';
 

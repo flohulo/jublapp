@@ -8,7 +8,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/5f437261-5c16-4d69-87a1-6d7bb4cb87f6/deploy-status)](https://app.netlify.com/projects/jubla-wald-reporting/deploys)
 ![Flutter](https://img.shields.io/badge/Flutter-3.47-02569B?logo=flutter&logoColor=white)
 ![Plattformen](https://img.shields.io/badge/Web%20%C2%B7%20Android%20%C2%B7%20Windows-eine%20Codebasis-4c9a2a)
-![Sprachen](https://img.shields.io/badge/Sprachen-DE%20%C2%B7%20FR%20%C2%B7%20IT%20%C2%B7%20EN-blue)
+![Sprachen](https://img.shields.io/badge/Sprachen-DE%20%C2%B7%20GSW%20%C2%B7%20FR%20%C2%B7%20IT%20%C2%B7%20EN-blue)
 [![Lizenz: AGPL-3.0](https://img.shields.io/badge/Lizenz-AGPL--3.0-lightgrey)](LICENSE)
 
 </div>
@@ -45,7 +45,7 @@ flowchart LR
 | `backend/functions/`      | Netlify Functions (API-Endpunkte)                   |
 | `backend/edge-functions/` | Auth-Prüfung vor allen Daten-Endpunkten             |
 | `web-extras/forms.html`   | Formular-Deklaration für Netlify Forms              |
-| `app/assets/locales/`     | Übersetzungen (Deutsch, Französisch, Italienisch, Englisch) |
+| `app/assets/locales/`     | Übersetzungen (Deutsch, Schweizerdeutsch, Französisch, Italienisch, Englisch) |
 | `docs/`                   | Handbuch (MkDocs)                                   |
 
 ## Loslegen
