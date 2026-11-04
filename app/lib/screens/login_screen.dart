@@ -304,18 +304,24 @@ class _Footer extends StatelessWidget {
           style: const TextStyle(fontSize: 13, color: AppColors.textDark),
         ),
         const SizedBox(height: 15),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 4),
-          decoration: BoxDecoration(
-            color: AppColors.primary,
+        Material(
+          color: AppColors.primary,
+          borderRadius: BorderRadius.circular(20),
+          child: InkWell(
             borderRadius: BorderRadius.circular(20),
-          ),
-          child: const Text(
-            'Version ${AppConfig.version}',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
+            onTap: () => context.read<UrlOpener>().open(
+                  Uri.parse(AppConfig.changelogUrl),
+                ),
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 4),
+              child: Text(
+                'Version ${AppConfig.version}',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
+              ),
             ),
           ),
         ),

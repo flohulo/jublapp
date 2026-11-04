@@ -37,6 +37,10 @@ class AppConfig {
   /// Datenschutzerklärung (Seite im Handbuch).
   static String get privacyUrl => '${handbookUrl}datenschutz/';
 
+  /// Changelog (von release-please gepflegt).
+  static const String changelogUrl =
+      'https://github.com/flohulo/jublapp/blob/main/CHANGELOG.md';
+
   /// Padlet des Lagers (Einbettungs-Adresse).
   static const String padletUrl =
       'https://padlet.com/embed/s024ubhxblf5j103t2p9';
