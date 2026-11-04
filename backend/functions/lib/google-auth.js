@@ -34,7 +34,7 @@ async function getAccessToken() {
   const claim = {
     iss: email,
     scope:
-      "https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/drive.file",
+      "https://www.googleapis.com/auth/spreadsheets",
     aud: "https://oauth2.googleapis.com/token",
     exp: nowSec + 3600,
     iat: nowSec,
