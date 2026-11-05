@@ -80,9 +80,10 @@ class _LoginScreenState extends State<LoginScreen>
                 ),
                 child: IntrinsicHeight(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+                    padding: const EdgeInsets.all(20),
                     child: Column(
                       children: [
+                        const Spacer(),
                         const Text(
                           'JUBL(A)PP',
                           style: TextStyle(
@@ -147,7 +148,6 @@ class _LoginScreenState extends State<LoginScreen>
                               ),
                             ),
                           ),
-                        const SizedBox(height: 40),
                         const Spacer(),
                         const _Footer(),
                       ],
@@ -187,88 +187,92 @@ class _LoginForm extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(color: borderColor, width: 2),
     );
-    return FractionallySizedBox(
-      widthFactor: 0.8,
-      child: Column(
-        children: [
-          TextField(
-            key: const Key('pin-field'),
-            controller: controller,
-            obscureText: true,
-            enableSuggestions: false,
-            autocorrect: false,
-            keyboardType: TextInputType.number,
-            textAlign: TextAlign.center,
-            maxLength: 6,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            autofillHints: const [AutofillHints.password],
-            onSubmitted: (_) => onSubmit(),
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 8,
-            ),
-            decoration: InputDecoration(
-              counterText: '',
-              hintText: placeholder,
-              hintStyle: const TextStyle(
-                fontWeight: FontWeight.normal,
-                color: Color(0xFF9E9E9E),
-              ),
-              prefixIcon: const Padding(
-                padding: EdgeInsets.only(left: 15, right: 5),
-                child: FaIcon(
-                  FontAwesomeIcons.key,
-                  size: 20,
-                  color: AppColors.primary,
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 360),
+        child: FractionallySizedBox(
+          widthFactor: 0.8,
+          child: Column(
+            children: [
+              TextField(
+                key: const Key('pin-field'),
+                controller: controller,
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                keyboardType: TextInputType.number,
+                textAlign: TextAlign.center,
+                maxLength: 6,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                autofillHints: const [AutofillHints.password],
+                onSubmitted: (_) => onSubmit(),
+                style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 8,
                 ),
-              ),
-              prefixIconConstraints: const BoxConstraints(minWidth: 40),
-              suffixIcon: const SizedBox(width: 40),
-              contentPadding: const EdgeInsets.symmetric(vertical: 13),
-              border: border,
-              enabledBorder: border,
-              focusedBorder: border,
-            ),
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton(
-              key: const Key('login-button'),
-              onPressed: busy ? null : onSubmit,
-              style: FilledButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                foregroundColor: Colors.white,
-                disabledBackgroundColor: AppColors.primary.withValues(
-                  alpha: 0.8,
-                ),
-                disabledForegroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 15),
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: busy
-                  ? const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: Colors.white,
-                      ),
-                    )
-                  : Text(
-                      buttonLabel.toUpperCase(),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                decoration: InputDecoration(
+                  counterText: '',
+                  hintText: placeholder,
+                  hintStyle: const TextStyle(
+                    fontWeight: FontWeight.normal,
+                    color: Color(0xFF9E9E9E),
+                  ),
+                  prefixIcon: const Padding(
+                    padding: EdgeInsets.only(left: 15, right: 5),
+                    child: FaIcon(
+                      FontAwesomeIcons.key,
+                      size: 20,
+                      color: AppColors.primary,
                     ),
-            ),
+                  ),
+                  prefixIconConstraints: const BoxConstraints(minWidth: 40),
+                  suffixIcon: const SizedBox(width: 40),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 13),
+                  border: border,
+                  enabledBorder: border,
+                  focusedBorder: border,
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  key: const Key('login-button'),
+                  onPressed: busy ? null : onSubmit,
+                  style: FilledButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: Colors.white,
+                    disabledBackgroundColor: AppColors.primary.withValues(
+                      alpha: 0.8,
+                    ),
+                    disabledForegroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: busy
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Colors.white,
+                          ),
+                        )
+                      : Text(
+                          buttonLabel.toUpperCase(),
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                ),
+              ),
+            ],
           ),
-        ],
       ),
     );
   }
