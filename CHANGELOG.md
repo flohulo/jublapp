@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.11.1](https://github.com/flohulo/jublapp/compare/jubla-reporting-v0.11.0...jubla-reporting-v0.11.1) (2026-11-06)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#60](https://github.com/flohulo/jublapp/issues/60)) ([f46d821](https://github.com/flohulo/jublapp/commit/f46d821b700b46b84338bb22c970cec65002c0db))
+* login-seite vertikal und horizontal zentrieren ([#57](https://github.com/flohulo/jublapp/issues/57)) ([b0dd3c0](https://github.com/flohulo/jublapp/commit/b0dd3c0336437af0e618f4f0fd35920883a7e120))
+
 ## [0.11.0](https://github.com/flohulo/jublapp/compare/jubla-reporting-v0.10.0...jubla-reporting-v0.11.0) (2026-11-04)
 
 
