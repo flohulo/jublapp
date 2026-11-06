@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.2](https://github.com/flohulo/jublapp/compare/jubla-reporting-v0.11.1...jubla-reporting-v0.11.2) (2026-11-06)
+
+
+### Bug Fixes
+
+* android-apk mit festem release-schlüssel signieren ([#61](https://github.com/flohulo/jublapp/issues/61)) ([2412d1f](https://github.com/flohulo/jublapp/commit/2412d1fd0e0f4d0df3a978325f7e9393af8423d5))
+
 ## [0.11.1](https://github.com/flohulo/jublapp/compare/jubla-reporting-v0.11.0...jubla-reporting-v0.11.1) (2026-11-06)
 
 
