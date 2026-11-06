@@ -74,83 +74,89 @@ class _LoginScreenState extends State<LoginScreen>
         child: SafeArea(
           child: LayoutBuilder(
             builder: (context, constraints) => SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: constraints.maxHeight,
-                ),
-                child: IntrinsicHeight(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        const Spacer(),
-                        const Text(
-                          'JUBL(A)PP',
-                          style: TextStyle(
-                            fontSize: 36,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight,
+                    maxWidth: AppTheme.maxContentWidth,
+                  ),
+                  child: IntrinsicHeight(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 20,
+                      ),
+                      child: Column(
+                        children: [
+                          const Spacer(),
+                          const Text(
+                            'JUBL(A)PP',
+                            style: TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 25),
-                        Text(
-                          i18n.t('login.greeting'),
-                          style: const TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.primary,
+                          const SizedBox(height: 25),
+                          Text(
+                            i18n.t('login.greeting'),
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.primary,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 25),
-                        Text(
-                          i18n.t('login.group_name'),
-                          style: const TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.primary,
+                          const SizedBox(height: 25),
+                          Text(
+                            i18n.t('login.group_name'),
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.primary,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 50),
-                        AnimatedBuilder(
-                          animation: _shake,
-                          builder: (context, child) {
-                            final t = _shake.value;
-                            final dx = t == 0 || t == 1
-                                ? 0.0
-                                : (t < 0.33
-                                      ? -5.0
-                                      : (t < 0.66 ? 5.0 : -5.0));
-                            return Transform.translate(
-                              offset: Offset(dx, 0),
-                              child: child,
-                            );
-                          },
-                          child: _LoginForm(
-                            controller: _pin,
-                            busy: _busy,
-                            error: _error,
-                            onSubmit: _submit,
-                            placeholder: i18n.t('login.pin_placeholder'),
-                            buttonLabel: i18n.t('login.submit'),
+                          const SizedBox(height: 50),
+                          AnimatedBuilder(
+                            animation: _shake,
+                            builder: (context, child) {
+                              final t = _shake.value;
+                              final dx = t == 0 || t == 1
+                                  ? 0.0
+                                  : (t < 0.33
+                                        ? -5.0
+                                        : (t < 0.66 ? 5.0 : -5.0));
+                              return Transform.translate(
+                                offset: Offset(dx, 0),
+                                child: child,
+                              );
+                            },
+                            child: _LoginForm(
+                              controller: _pin,
+                              busy: _busy,
+                              error: _error,
+                              onSubmit: _submit,
+                              placeholder: i18n.t('login.pin_placeholder'),
+                              buttonLabel: i18n.t('login.submit'),
+                            ),
                           ),
-                        ),
-                        if (_error && _errorKey.isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12),
-                            child: Semantics(
-                              liveRegion: true,
-                              child: Text(
-                                i18n.t(_errorKey),
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: AppColors.error,
+                          if (_error && _errorKey.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12),
+                              child: Semantics(
+                                liveRegion: true,
+                                child: Text(
+                                  i18n.t(_errorKey),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    color: AppColors.error,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        const Spacer(),
-                        const _Footer(),
-                      ],
+                          const Spacer(),
+                          const _Footer(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -187,94 +193,86 @@ class _LoginForm extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(color: borderColor, width: 2),
     );
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 360),
-        child: FractionallySizedBox(
-          widthFactor: 0.8,
-          child: Column(
-            children: [
-              TextField(
-                key: const Key('pin-field'),
-                controller: controller,
-                obscureText: true,
-                enableSuggestions: false,
-                autocorrect: false,
-                keyboardType: TextInputType.number,
-                textAlign: TextAlign.center,
-                maxLength: 6,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                autofillHints: const [AutofillHints.password],
-                onSubmitted: (_) => onSubmit(),
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 8,
-                ),
-                decoration: InputDecoration(
-                  counterText: '',
-                  hintText: placeholder,
-                  hintStyle: const TextStyle(
-                    fontWeight: FontWeight.normal,
-                    color: Color(0xFF9E9E9E),
-                  ),
-                  prefixIcon: const Padding(
-                    padding: EdgeInsets.only(left: 15, right: 5),
-                    child: FaIcon(
-                      FontAwesomeIcons.key,
-                      size: 20,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                  prefixIconConstraints: const BoxConstraints(minWidth: 40),
-                  suffixIcon: const SizedBox(width: 40),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 13),
-                  border: border,
-                  enabledBorder: border,
-                  focusedBorder: border,
-                ),
+    return Column(
+      children: [
+        TextField(
+          key: const Key('pin-field'),
+          controller: controller,
+          obscureText: true,
+          enableSuggestions: false,
+          autocorrect: false,
+          keyboardType: TextInputType.number,
+          textAlign: TextAlign.center,
+          maxLength: 6,
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          autofillHints: const [AutofillHints.password],
+          onSubmitted: (_) => onSubmit(),
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 8,
+          ),
+          decoration: InputDecoration(
+            counterText: '',
+            hintText: placeholder,
+            hintStyle: const TextStyle(
+              fontWeight: FontWeight.normal,
+              color: Color(0xFF9E9E9E),
+            ),
+            prefixIcon: const Padding(
+              padding: EdgeInsets.only(left: 15, right: 5),
+              child: FaIcon(
+                FontAwesomeIcons.key,
+                size: 20,
+                color: AppColors.primary,
               ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  key: const Key('login-button'),
-                  onPressed: busy ? null : onSubmit,
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    foregroundColor: Colors.white,
-                    disabledBackgroundColor: AppColors.primary.withValues(
-                      alpha: 0.8,
-                    ),
-                    disabledForegroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: busy
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: Colors.white,
-                          ),
-                        )
-                      : Text(
-                          buttonLabel.toUpperCase(),
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                ),
-              ),
-            ],
+            ),
+            prefixIconConstraints: const BoxConstraints(minWidth: 40),
+            suffixIcon: const SizedBox(width: 40),
+            contentPadding: const EdgeInsets.symmetric(vertical: 13),
+            border: border,
+            enabledBorder: border,
+            focusedBorder: border,
           ),
         ),
-      ),
+        const SizedBox(height: 20),
+        SizedBox(
+          width: double.infinity,
+          child: FilledButton(
+            key: const Key('login-button'),
+            onPressed: busy ? null : onSubmit,
+            style: FilledButton.styleFrom(
+              backgroundColor: AppColors.primary,
+              foregroundColor: Colors.white,
+              disabledBackgroundColor: AppColors.primary.withValues(
+                alpha: 0.8,
+              ),
+              disabledForegroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: busy
+                ? const SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Colors.white,
+                    ),
+                  )
+                : Text(
+                    buttonLabel.toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+          ),
+        ),
+      ],
     );
   }
 }
