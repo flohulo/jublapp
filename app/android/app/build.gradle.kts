@@ -30,11 +30,38 @@ android {
         versionName = flutter.versionName
     }
 
+    // Fester Release-Schlüssel: Android installiert Updates nur, wenn die Signatur
+    // gleich bleibt. Der Keystore kommt in der CI aus GitHub-Secrets (siehe
+    // .github/workflows/app-build.yml) und liegt nie im Repository.
+    val releaseKeystore = file("release.keystore")
+    val releaseSigningAvailable =
+        releaseKeystore.exists() &&
+            !System.getenv("ANDROID_KEYSTORE_PASSWORD").isNullOrEmpty() &&
+            !System.getenv("ANDROID_KEY_ALIAS").isNullOrEmpty() &&
+            !System.getenv("ANDROID_KEY_PASSWORD").isNullOrEmpty()
+
+    signingConfigs {
+        if (releaseSigningAvailable) {
+            create("release") {
+                storeFile = releaseKeystore
+                storePassword = System.getenv("ANDROID_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("ANDROID_KEY_ALIAS")
+                keyPassword = System.getenv("ANDROID_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            // Ohne Keystore (lokal, Pull-Requests ohne Secrets) mit dem Debug-Schlüssel
+            // signieren, damit `flutter run --release` weiter funktioniert. Solche
+            // APKs lassen sich nicht als Update über eine Release-APK installieren.
+            signingConfig =
+                if (releaseSigningAvailable) {
+                    signingConfigs.getByName("release")
+                } else {
+                    signingConfigs.getByName("debug")
+                }
         }
     }
 }
